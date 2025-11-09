@@ -181,8 +181,13 @@ async function fetchAllUpdates() {
             
             const updatecheck = appResponse.updatecheck;
             const version = updatecheck.manifest.version;
-            const url = updatecheck.urls.url.find(s => s.codebase.startsWith("https://dl.google.com")) 
-                        || updatecheck.urls.url[updatecheck.urls.url.length - 1];
+            // Find URL from dl.google.com with exact match to avoid URL injection
+            const url = updatecheck.urls.url.find(s => {
+                const codebase = s.codebase;
+                return codebase === "https://dl.google.com/" || 
+                       codebase.startsWith("https://dl.google.com/") && 
+                       new URL(codebase).hostname === "dl.google.com";
+            }) || updatecheck.urls.url[updatecheck.urls.url.length - 1];
             const pkg = updatecheck.manifest.packages.package[updatecheck.manifest.packages.package.length - 1];
             
             allResults.push({

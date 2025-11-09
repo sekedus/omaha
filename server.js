@@ -170,8 +170,25 @@ const server = http.createServer((req, res) => {
     if (filePath === './') {
         filePath = './index.html';
     }
-
+    
+    // Prevent path traversal attacks
+    const resolvedPath = path.resolve(filePath);
+    const baseDir = path.resolve('.');
+    if (!resolvedPath.startsWith(baseDir)) {
+        res.writeHead(403, { 'Content-Type': 'text/html' });
+        res.end('<h1>403 Forbidden</h1>', 'utf-8');
+        return;
+    }
+    
+    // Only serve specific file types
+    const allowedExtensions = ['.html', '.js', '.css', '.json'];
     const extname = String(path.extname(filePath)).toLowerCase();
+    if (!allowedExtensions.includes(extname)) {
+        res.writeHead(403, { 'Content-Type': 'text/html' });
+        res.end('<h1>403 Forbidden</h1>', 'utf-8');
+        return;
+    }
+    
     const contentType = mimeTypes[extname] || 'application/octet-stream';
 
     fs.readFile(filePath, (error, content) => {
