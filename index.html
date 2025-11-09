@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Product Update Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+        }
+        .controls {
+            margin: 20px 0;
+        }
+        button {
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #357ae8;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .info {
+            margin: 10px 0;
+            color: #666;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4285f4;
+            color: white;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .download-link {
+            color: #4285f4;
+            text-decoration: none;
+        }
+        .download-link:hover {
+            text-decoration: underline;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        textarea {
+            width: 100%;
+            height: 400px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .response-section {
+            margin: 20px 0;
+        }
+        .hidden {
+            display: none;
+        }
+        .loading {
+            color: #666;
+            font-style: italic;
+        }
+        .error {
+            color: #d32f2f;
+            background-color: #ffebee;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Google Product Update Checker</h1>
+    
+    <div class="controls">
+        <button id="fetchBtn">Fetch Updates</button>
+        <button id="toggleResponseBtn">Show POST Response</button>
+    </div>
+    
+    <div id="lastUpdateInfo" class="info hidden"></div>
+    <div id="loading" class="loading hidden">Fetching data...</div>
+    <div id="error" class="error hidden"></div>
+    
+    <div id="tableContainer" class="hidden">
+        <table id="resultsTable">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Version</th>
+                    <th>Channel</th>
+                    <th>Download</th>
+                    <th>Size</th>
+                    <th>SHA256</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+    </div>
+    
+    <div id="responseSection" class="response-section hidden">
+        <h3>POST Response (JSON)</h3>
+        <textarea id="responseText" readonly></textarea>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,22 +1,29 @@
-# omaha2tg
+# omaha
 
-Source code for https://t.me/google_omaha
+A Google product update checker with HTML interface.
 
-a Google product update checker.
+Current checking products: Chrome (Stable, Beta, Dev, Canary), Google Play Games Beta, Quick Share, Google Play Games Developer Emulator (Stable, Beta)
 
-Current checking products: see `src/omaha.ts`
+## Usage
+
+1. Open `index.html` in a web browser, or
+2. Run the local server:
+   ```bash
+   npm start
+   ```
+   Then open http://localhost:8080 in your browser
+
+## Features
+
+- Click "Fetch Updates" button to check for the latest versions
+- Results displayed in a table with download links
+- Data cached for 5 minutes in browser localStorage
+- Show/hide POST response (beautified JSON)
+- Last update timestamp shown when cache is valid
 
 ## Notes
 
-nodejs 20.18.3, yarn 1.22.22
-
-`cp wrangler.toml.template wrangler.toml`
-
-group id contains -100 prefix
-
-`yarn run dev`
-
-`yarn run deploy`
+nodejs 20.18.3 or later recommended
 
 ## Reference
 
