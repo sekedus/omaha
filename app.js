@@ -215,16 +215,18 @@ function displayResults(results) {
     results.forEach(result => {
         const row = tbody.insertRow();
         row.innerHTML = `
-            <td>${escapeHtml(result.name)}</td>
-            <td><code>${escapeHtml(result.version)}</code></td>
-            <td>${escapeHtml(result.channel)}</td>
-            <td><a href="${escapeHtml(result.downloadUrl)}" class="download-link" target="_blank">Download</a></td>
-            <td>${formatBytes(result.size)}</td>
-            <td><code>${escapeHtml(result.sha256)}</code></td>
+            <td data-label="Product">${escapeHtml(result.name)}</td>
+            <td data-label="Version"><code>${escapeHtml(result.version)}</code></td>
+            <td data-label="Channel">${escapeHtml(result.channel)}</td>
+            <td data-label="Download"><a href="${escapeHtml(result.downloadUrl)}" class="download-link" target="_blank">Download</a></td>
+            <td data-label="Size">${formatBytes(result.size)}</td>
+            <td data-label="SHA256"><code>${escapeHtml(result.sha256)}</code></td>
         `;
     });
     
     document.getElementById('tableContainer').classList.remove('hidden');
+    // Show the toggle response button when table is visible
+    document.getElementById('toggleResponseBtn').classList.remove('hidden');
 }
 
 function escapeHtml(text) {
@@ -261,9 +263,10 @@ function loadFromCache() {
     const cacheAge = Date.now() - parseInt(timestamp);
     
     if (cacheAge > CACHE_DURATION_MS) {
-        // Cache expired - hide table and timestamp
+        // Cache expired - hide table, timestamp, and toggle button
         document.getElementById('tableContainer').classList.add('hidden');
         document.getElementById('lastUpdateInfo').classList.add('hidden');
+        document.getElementById('toggleResponseBtn').classList.add('hidden');
         return null;
     }
     
@@ -314,10 +317,68 @@ function toggleResponse() {
     }
 }
 
+function copyToClipboard() {
+    const textarea = document.getElementById('responseText');
+    const copyBtn = document.getElementById('copyBtn');
+    
+    textarea.select();
+    textarea.setSelectionRange(0, 99999); // For mobile devices
+    
+    navigator.clipboard.writeText(textarea.value).then(() => {
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => {
+            copyBtn.textContent = originalText;
+        }, 2000);
+    }).catch(err => {
+        console.error('Failed to copy:', err);
+        // Fallback for older browsers
+        document.execCommand('copy');
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => {
+            copyBtn.textContent = originalText;
+        }, 2000);
+    });
+}
+
+function toggleTheme() {
+    const html = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const currentTheme = html.getAttribute('data-theme');
+    
+    if (currentTheme === 'dark') {
+        html.removeAttribute('data-theme');
+        themeToggle.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+    } else {
+        html.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+    }
+}
+
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const themeToggle = document.getElementById('themeToggle');
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = '☀️';
+    } else {
+        themeToggle.textContent = '🌙';
+    }
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+    
     document.getElementById('fetchBtn').addEventListener('click', fetchData);
     document.getElementById('toggleResponseBtn').addEventListener('click', toggleResponse);
+    document.getElementById('copyBtn').addEventListener('click', copyToClipboard);
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
     
     // Try to load from cache
     const cached = loadFromCache();
