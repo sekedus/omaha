@@ -1,25 +1,130 @@
-# omaha2tg
+# Google Product Update Checker (omaha)
 
-Source code for https://t.me/google_omaha
+A web-based Google product update checker that queries the Omaha update API to display the latest versions of Google Chrome, Google Play Games, Quick Share, and other Google products.
 
-a Google product update checker.
+This project is a fork of [chsbuffer/omaha2tg](https://github.com/chsbuffer/omaha2tg), converted from a Cloudflare Worker + Telegram bot architecture to a standalone HTML application with an interactive user interface.
 
-Current checking products: see `src/omaha.ts`
+## Screenshot
 
-## Notes
+![Google Product Update Checker](./omaha.png)
 
-nodejs 20.18.3, yarn 1.22.22
+## Features
 
-`cp wrangler.toml.template wrangler.toml`
+- ✅ **On-demand update checks** - Click "Fetch Updates" to retrieve the latest versions
+- 📊 **Table display** - Clean presentation of product versions, channels, download URLs, sizes, and SHA256 hashes
+- 💾 **5-minute cache** - Data cached in localStorage with automatic expiration
+- 🌓 **Dark mode** - Toggle between light and dark themes (respects system preference)
+- 📱 **Responsive design** - Mobile-friendly interface that works on all screen sizes
+- 📋 **Copy to clipboard** - Easily copy the raw JSON response
+- 🔒 **Secure** - Path traversal protection and URL validation
 
-group id contains -100 prefix
+## Products Tracked
 
-`yarn run dev`
+- Google Chrome (Stable, Beta, Dev, Canary)
+- Google Play Games Beta
+- Quick Share (formerly Nearby Share)
+- Google Play Games Developer Emulator (Stable, Beta)
 
-`yarn run deploy`
+## Prerequisites
 
-## Reference
+- Node.js 20.18.3 or later
+- A modern web browser (Chrome, Firefox, Safari, Edge)
 
-[chromium/src/+/main:docs/updater/protocol_3_1.md](https://source.chromium.org/chromium/chromium/src/+/main:docs/updater/protocol_3_1.md)
+## Installation
 
-[omaha/blob/main/doc/ServerProtocolV3.md](https://github.com/google/omaha/blob/main/doc/ServerProtocolV3.md)
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/sekedus/omaha.git
+   cd omaha
+   ```
+
+2. **Install dependencies** (optional, only needed if using npm scripts)
+   ```bash
+   npm install
+   ```
+
+## Usage
+
+### Option 1: Using the local server (recommended)
+
+1. **Start the server**
+   ```bash
+   npm start
+   ```
+
+2. **Open your browser**
+   Navigate to `http://localhost:8080`
+
+3. **Fetch updates**
+   Click the "Fetch Updates" button to retrieve the latest product versions
+
+### Option 2: Open directly in browser
+
+1. Simply open `index.html` in your web browser
+2. Note: This method won't work with the real API due to CORS restrictions, but the app will function with cached data if available
+
+## How It Works
+
+1. **User clicks "Fetch Updates"** - The app sends POST requests to Google's Omaha update API
+2. **Server proxy** - `server.js` acts as a proxy to bypass CORS restrictions
+3. **Data parsing** - The app parses the JSON response and extracts version information
+4. **Display** - Results are shown in a responsive table with download links
+5. **Caching** - Data is stored in localStorage for 5 minutes to reduce API calls
+
+## Mock Mode
+
+For testing or development when the API is unavailable, you can run the server in mock mode:
+
+```bash
+npm run start:mock
+```
+
+This will return sample data instead of querying the actual API.
+
+## File Structure
+
+```
+omaha/
+├── index.html      # Main HTML file with styles
+├── app.js          # JavaScript application logic
+├── server.js       # Node.js HTTP server with CORS proxy
+├── package.json    # Node.js dependencies and scripts
+└── README.md       # This file
+```
+
+## Development
+
+The application uses vanilla JavaScript with no build step required. To make changes:
+
+1. Edit `index.html` for structure and styles
+2. Edit `app.js` for application logic
+3. Edit `server.js` for server-side proxy logic
+4. Refresh your browser to see changes
+
+## Security
+
+The application includes several security measures:
+
+- **URL validation** - Ensures download URLs are from trusted Google domains
+- **Path traversal protection** - Prevents accessing files outside the project directory
+- **File type whitelist** - Only serves `.html`, `.js`, `.css`, and `.json` files
+- **CORS headers** - Properly configured for the proxy endpoint
+
+## Credits
+
+- **Original project**: [chsbuffer/omaha2tg](https://github.com/chsbuffer/omaha2tg) - Cloudflare Worker + Telegram bot implementation
+- **Omaha Protocol**: Google's update protocol for Chrome and other products
+  - [Chromium Omaha Protocol Documentation](https://source.chromium.org/chromium/chromium/src/+/main:docs/updater/protocol_3_1.md)
+  - [Google Omaha Protocol V3](https://github.com/google/omaha/blob/main/doc/ServerProtocolV3.md)
+
+## License
+
+This project follows the same license as the original [chsbuffer/omaha2tg](https://github.com/chsbuffer/omaha2tg) repository.
+
+<!-- ## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Support
+
+For issues, questions, or suggestions, please [open an issue](https://github.com/sekedus/omaha/issues) on GitHub. -->

@@ -1,0 +1,401 @@
+[
+  {
+    "response": {
+      "server": "prod",
+      "protocol": "3.1",
+      "daystart": {
+        "elapsed_seconds": 82635,
+        "elapsed_days": 6887
+      },
+      "app": [
+        {
+          "appid": "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
+          "cohort": "1:gu/i19:",
+          "status": "ok",
+          "cohortname": "Stable Installs & Version Pins",
+          "updatecheck": {
+            "status": "ok",
+            "urls": {
+              "url": [
+                {
+                  "codebase": "http://edgedl.me.gvt1.com/edgedl/release2/chrome/jhbku3uvsequ6icepqqyqb6d54_142.0.7444.135/"
+                },
+                {
+                  "codebase": "https://edgedl.me.gvt1.com/edgedl/release2/chrome/jhbku3uvsequ6icepqqyqb6d54_142.0.7444.135/"
+                },
+                {
+                  "codebase": "http://dl.google.com/release2/chrome/jhbku3uvsequ6icepqqyqb6d54_142.0.7444.135/"
+                },
+                {
+                  "codebase": "https://dl.google.com/release2/chrome/jhbku3uvsequ6icepqqyqb6d54_142.0.7444.135/"
+                },
+                {
+                  "codebase": "http://www.google.com/dl/release2/chrome/jhbku3uvsequ6icepqqyqb6d54_142.0.7444.135/"
+                },
+                {
+                  "codebase": "https://www.google.com/dl/release2/chrome/jhbku3uvsequ6icepqqyqb6d54_142.0.7444.135/"
+                }
+              ]
+            },
+            "manifest": {
+              "arguments": "--verbose-logging --do-not-launch-chrome --channel=stable",
+              "version": "142.0.7444.135",
+              "packages": {
+                "package": [
+                  {
+                    "hash_sha256": "fa438bf14b9c72ea8f2b57c347dcdf57855e203c61c3c3813249210bc6e12c91",
+                    "size": 441212840,
+                    "name": "142.0.7444.135_chrome_installer_uncompressed.exe",
+                    "fp": "1.fa438bf14b9c72ea8f2b57c347dcdf57855e203c61c3c3813249210bc6e12c91",
+                    "required": true,
+                    "hash": "YeZq5RZz5sbOGJsNy8VgGO7b2Kw="
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "appid": "{8237E44A-0054-442C-B6B6-EA0509993955}",
+          "cohort": "1:klf:",
+          "status": "ok",
+          "cohortname": "Beta",
+          "updatecheck": {
+            "status": "ok",
+            "urls": {
+              "url": [
+                {
+                  "codebase": "http://edgedl.me.gvt1.com/edgedl/release2/chrome/acr7evz5ttruxj654btlovfznlxq_143.0.7499.17/"
+                },
+                {
+                  "codebase": "https://edgedl.me.gvt1.com/edgedl/release2/chrome/acr7evz5ttruxj654btlovfznlxq_143.0.7499.17/"
+                },
+                {
+                  "codebase": "http://dl.google.com/release2/chrome/acr7evz5ttruxj654btlovfznlxq_143.0.7499.17/"
+                },
+                {
+                  "codebase": "https://dl.google.com/release2/chrome/acr7evz5ttruxj654btlovfznlxq_143.0.7499.17/"
+                },
+                {
+                  "codebase": "http://www.google.com/dl/release2/chrome/acr7evz5ttruxj654btlovfznlxq_143.0.7499.17/"
+                },
+                {
+                  "codebase": "https://www.google.com/dl/release2/chrome/acr7evz5ttruxj654btlovfznlxq_143.0.7499.17/"
+                }
+              ]
+            },
+            "manifest": {
+              "arguments": "--verbose-logging --do-not-launch-chrome --chrome-beta",
+              "version": "143.0.7499.17",
+              "packages": {
+                "package": [
+                  {
+                    "hash_sha256": "f0216f4ed9ef144c130fec40b3f2aa9c194d79289c1308b3a3b364dccf2c802f",
+                    "size": 441855912,
+                    "name": "143.0.7499.17_chrome_installer_uncompressed.exe",
+                    "fp": "1.f0216f4ed9ef144c130fec40b3f2aa9c194d79289c1308b3a3b364dccf2c802f",
+                    "required": true,
+                    "hash": "AmPte6dzyUuNlhboRTFxxnbXbmM="
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "appid": "{401C381F-E0DE-4B85-8BD8-3F3F14FBDA57}",
+          "cohort": "1:jlx:",
+          "status": "ok",
+          "cohortname": "Dev",
+          "updatecheck": {
+            "status": "ok",
+            "urls": {
+              "url": [
+                {
+                  "codebase": "http://edgedl.me.gvt1.com/edgedl/release2/chrome/ac7sivs5yd3kx545rsi7p6ckhhua_144.0.7512.4/"
+                },
+                {
+                  "codebase": "https://edgedl.me.gvt1.com/edgedl/release2/chrome/ac7sivs5yd3kx545rsi7p6ckhhua_144.0.7512.4/"
+                },
+                {
+                  "codebase": "http://dl.google.com/release2/chrome/ac7sivs5yd3kx545rsi7p6ckhhua_144.0.7512.4/"
+                },
+                {
+                  "codebase": "https://dl.google.com/release2/chrome/ac7sivs5yd3kx545rsi7p6ckhhua_144.0.7512.4/"
+                },
+                {
+                  "codebase": "http://www.google.com/dl/release2/chrome/ac7sivs5yd3kx545rsi7p6ckhhua_144.0.7512.4/"
+                },
+                {
+                  "codebase": "https://www.google.com/dl/release2/chrome/ac7sivs5yd3kx545rsi7p6ckhhua_144.0.7512.4/"
+                }
+              ]
+            },
+            "manifest": {
+              "arguments": "--verbose-logging --do-not-launch-chrome --chrome-dev",
+              "version": "144.0.7512.4",
+              "packages": {
+                "package": [
+                  {
+                    "hash_sha256": "2a6e3830095ac26c36f8300907348235437fb0253fdec32be34fb5cf01889cfe",
+                    "size": 442956200,
+                    "name": "144.0.7512.4_chrome_installer_uncompressed.exe",
+                    "fp": "1.2a6e3830095ac26c36f8300907348235437fb0253fdec32be34fb5cf01889cfe",
+                    "required": true,
+                    "hash": "MaCghn3Ii9o4OcDeBKCDBZoO9ns="
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "appid": "{4EA16AC7-FD5A-47C3-875B-DBF4A2008C20}",
+          "cohort": "1:jn:3caa@0.05",
+          "status": "ok",
+          "cohortname": "Clang-64",
+          "updatecheck": {
+            "status": "ok",
+            "urls": {
+              "url": [
+                {
+                  "codebase": "http://edgedl.me.gvt1.com/edgedl/release2/chrome/kgjsaiw4nodnaxkvgz24qpa25u_144.0.7519.0/"
+                },
+                {
+                  "codebase": "https://edgedl.me.gvt1.com/edgedl/release2/chrome/kgjsaiw4nodnaxkvgz24qpa25u_144.0.7519.0/"
+                },
+                {
+                  "codebase": "http://dl.google.com/release2/chrome/kgjsaiw4nodnaxkvgz24qpa25u_144.0.7519.0/"
+                },
+                {
+                  "codebase": "https://dl.google.com/release2/chrome/kgjsaiw4nodnaxkvgz24qpa25u_144.0.7519.0/"
+                },
+                {
+                  "codebase": "http://www.google.com/dl/release2/chrome/kgjsaiw4nodnaxkvgz24qpa25u_144.0.7519.0/"
+                },
+                {
+                  "codebase": "https://www.google.com/dl/release2/chrome/kgjsaiw4nodnaxkvgz24qpa25u_144.0.7519.0/"
+                }
+              ]
+            },
+            "manifest": {
+              "arguments": "--do-not-launch-chrome --chrome-sxs",
+              "version": "144.0.7519.0",
+              "packages": {
+                "package": [
+                  {
+                    "hash_sha256": "08dcdebd3ae5e0e61a9f8b316c614c49366cc093741896634b6a91ce28904ac3",
+                    "size": 442308008,
+                    "name": "144.0.7519.0_chrome_installer_uncompressed.exe",
+                    "fp": "1.08dcdebd3ae5e0e61a9f8b316c614c49366cc093741896634b6a91ce28904ac3",
+                    "required": true,
+                    "hash": "YUOP56ajEOA0O9ho3gxK6VE9Ge0="
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "appid": "{47B07D71-505D-4665-AFD4-4972A30C6530}",
+          "cohort": "1:116l/3c7x:3c83@0.5",
+          "status": "ok",
+          "cohortname": "2025-11.a Experiment",
+          "updatecheck": {
+            "status": "ok",
+            "urls": {
+              "url": [
+                {
+                  "codebase": "http://edgedl.me.gvt1.com/edgedl/release2/Play/dk5o5ak5mlzgudub3mstxtsjsi_25.11.113.2/"
+                },
+                {
+                  "codebase": "https://edgedl.me.gvt1.com/edgedl/release2/Play/dk5o5ak5mlzgudub3mstxtsjsi_25.11.113.2/"
+                },
+                {
+                  "codebase": "http://dl.google.com/release2/Play/dk5o5ak5mlzgudub3mstxtsjsi_25.11.113.2/"
+                },
+                {
+                  "codebase": "https://dl.google.com/release2/Play/dk5o5ak5mlzgudub3mstxtsjsi_25.11.113.2/"
+                },
+                {
+                  "codebase": "http://www.google.com/dl/release2/Play/dk5o5ak5mlzgudub3mstxtsjsi_25.11.113.2/"
+                },
+                {
+                  "codebase": "https://www.google.com/dl/release2/Play/dk5o5ak5mlzgudub3mstxtsjsi_25.11.113.2/"
+                }
+              ]
+            },
+            "manifest": {
+              "arguments": "/o{47B07D71-505D-4665-AFD4-4972A30C6530} /l1518 /noui",
+              "version": "25.11.113.2",
+              "packages": {
+                "package": [
+                  {
+                    "hash_sha256": "4f6945eafeb026bff948cb64cc40d7129aca25b14fef40300f3073942973faca",
+                    "size": 882629808,
+                    "name": "HPE-25.11.113.2-CIP.exe",
+                    "fp": "1.4f6945eafeb026bff948cb64cc40d7129aca25b14fef40300f3073942973faca",
+                    "required": true,
+                    "hash": "7Nsca6rHO2OJEuw4ntOJFXn1ry4="
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "appid": "{232066FE-FF4D-4C25-83B4-3F8747CF7E3A}",
+          "cohort": "1:135x/2qo9:2qof@0.2",
+          "status": "ok",
+          "cohortname": "Everyone 50%",
+          "updatecheck": {
+            "status": "ok",
+            "urls": {
+              "url": [
+                {
+                  "codebase": "http://edgedl.me.gvt1.com/edgedl/release2/Nearby/nzycihmex74ey4qip3kn2navfq_1.0.2351.1/"
+                },
+                {
+                  "codebase": "https://edgedl.me.gvt1.com/edgedl/release2/Nearby/nzycihmex74ey4qip3kn2navfq_1.0.2351.1/"
+                },
+                {
+                  "codebase": "http://dl.google.com/release2/Nearby/nzycihmex74ey4qip3kn2navfq_1.0.2351.1/"
+                },
+                {
+                  "codebase": "https://dl.google.com/release2/Nearby/nzycihmex74ey4qip3kn2navfq_1.0.2351.1/"
+                },
+                {
+                  "codebase": "http://www.google.com/dl/release2/Nearby/nzycihmex74ey4qip3kn2navfq_1.0.2351.1/"
+                },
+                {
+                  "codebase": "https://www.google.com/dl/release2/Nearby/nzycihmex74ey4qip3kn2navfq_1.0.2351.1/"
+                }
+              ]
+            },
+            "manifest": {
+              "version": "1.0.2351.1",
+              "packages": {
+                "package": [
+                  {
+                    "hash_sha256": "bbba569461c8339acd7b23aec6a21095abb955db3cccbe91af26efcca07e39a9",
+                    "size": 42299392,
+                    "name": "better_together.msi",
+                    "fp": "1.bbba569461c8339acd7b23aec6a21095abb955db3cccbe91af26efcca07e39a9",
+                    "required": true,
+                    "hash": "nLfP+a55q2ibwC4tAVfm+mkOusY="
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "appid": "{C601E9A4-03B0-4188-843E-80058BF16EF9}",
+          "cohort": "1:1bpx:",
+          "status": "ok",
+          "cohortname": "Prod",
+          "updatecheck": {
+            "status": "ok",
+            "urls": {
+              "url": [
+                {
+                  "codebase": "http://edgedl.me.gvt1.com/edgedl/release2/Play/adzbtgqupnuhdt4lmhyix7526n6q_25.8.307.1/"
+                },
+                {
+                  "codebase": "https://edgedl.me.gvt1.com/edgedl/release2/Play/adzbtgqupnuhdt4lmhyix7526n6q_25.8.307.1/"
+                },
+                {
+                  "codebase": "http://dl.google.com/release2/Play/adzbtgqupnuhdt4lmhyix7526n6q_25.8.307.1/"
+                },
+                {
+                  "codebase": "https://dl.google.com/release2/Play/adzbtgqupnuhdt4lmhyix7526n6q_25.8.307.1/"
+                },
+                {
+                  "codebase": "http://www.google.com/dl/release2/Play/adzbtgqupnuhdt4lmhyix7526n6q_25.8.307.1/"
+                },
+                {
+                  "codebase": "https://www.google.com/dl/release2/Play/adzbtgqupnuhdt4lmhyix7526n6q_25.8.307.1/"
+                }
+              ]
+            },
+            "manifest": {
+              "arguments": "/o{C601E9A4-03B0-4188-843E-80058BF16EF9} /l1518 /noui",
+              "version": "25.8.307.1",
+              "packages": {
+                "package": [
+                  {
+                    "hash_sha256": "527aba0b9f1f1dee800b8918ebdf4c413b1ab36f3eb9a58858faa4faaa0ba5d5",
+                    "size": 755396064,
+                    "name": "HPE-25.8.307.1-CIP_3pdev_prod.exe",
+                    "fp": "1.527aba0b9f1f1dee800b8918ebdf4c413b1ab36f3eb9a58858faa4faaa0ba5d5",
+                    "required": true,
+                    "hash": "hUyS2iNCMAdMkENyUI/oHc4rucE="
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "response": {
+      "server": "prod",
+      "protocol": "3.1",
+      "daystart": {
+        "elapsed_seconds": 82636,
+        "elapsed_days": 6887
+      },
+      "app": [
+        {
+          "appid": "{C601E9A4-03B0-4188-843E-80058BF16EF9}",
+          "cohort": "1:1bpr:",
+          "status": "ok",
+          "cohortname": "Dogfood",
+          "updatecheck": {
+            "status": "ok",
+            "urls": {
+              "url": [
+                {
+                  "codebase": "http://edgedl.me.gvt1.com/edgedl/release2/Play/acdyzgyu3vvdd43mtn35vqtnkmnq_25.8.307.0/"
+                },
+                {
+                  "codebase": "https://edgedl.me.gvt1.com/edgedl/release2/Play/acdyzgyu3vvdd43mtn35vqtnkmnq_25.8.307.0/"
+                },
+                {
+                  "codebase": "http://dl.google.com/release2/Play/acdyzgyu3vvdd43mtn35vqtnkmnq_25.8.307.0/"
+                },
+                {
+                  "codebase": "https://dl.google.com/release2/Play/acdyzgyu3vvdd43mtn35vqtnkmnq_25.8.307.0/"
+                },
+                {
+                  "codebase": "http://www.google.com/dl/release2/Play/acdyzgyu3vvdd43mtn35vqtnkmnq_25.8.307.0/"
+                },
+                {
+                  "codebase": "https://www.google.com/dl/release2/Play/acdyzgyu3vvdd43mtn35vqtnkmnq_25.8.307.0/"
+                }
+              ]
+            },
+            "manifest": {
+              "arguments": "/o{C601E9A4-03B0-4188-843E-80058BF16EF9} /l1518 /noui",
+              "version": "25.8.307.0",
+              "packages": {
+                "package": [
+                  {
+                    "hash_sha256": "2091ea75e8c88db72564873982f72d1002598050ec067912a251330ef51ce383",
+                    "size": 755393240,
+                    "name": "HPE-25.8.307.0-CIP_3pdev_prod.exe",
+                    "fp": "1.2091ea75e8c88db72564873982f72d1002598050ec067912a251330ef51ce383",
+                    "required": true,
+                    "hash": "XRK9bzFc9oNyFzy1TBNkFT8mwQg="
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+]

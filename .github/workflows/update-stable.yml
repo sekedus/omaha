@@ -1,0 +1,295 @@
+name: Update Stable Versions and Create Release
+
+on:
+  schedule:
+    # Run daily at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Fetch stable versions
+        id: fetch
+        run: |
+          # Create a Node.js script to fetch stable versions
+          cat > fetch-stable.js << 'EOF'
+          const https = require('https');
+          const fs = require('fs');
+
+          const apps = [
+            {
+              guid: "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
+              tag: "ChromeStable",
+              name: "Google Chrome",
+              extra: { ap: "x64-stable-statsdef_1" }
+            },
+            {
+              guid: "{8237E44A-0054-442C-B6B6-EA0509993955}",
+              tag: "ChromeBeta",
+              name: "Google Chrome Beta",
+              extra: {}
+            },
+            {
+              guid: "{401C381F-E0DE-4B85-8BD8-3F3F14FBDA57}",
+              tag: "ChromeDev",
+              name: "Google Chrome Dev",
+              extra: { ap: "-arch_x64-statsdef_1" }
+            },
+            {
+              guid: "{4EA16AC7-FD5A-47C3-875B-DBF4A2008C20}",
+              tag: "ChromeCanary",
+              name: "Google Chrome Canary",
+              extra: { cohort: "1:jn:1ojl@0.05", ap: "x64-canary-statsdef_1" }
+            },
+            {
+              guid: "{47B07D71-505D-4665-AFD4-4972A30C6530}",
+              tag: "PlayGames",
+              name: "Google Play Games Beta",
+              extra: { ap: "beta" }
+            },
+            {
+              guid: "{232066FE-FF4D-4C25-83B4-3F8747CF7E3A}",
+              tag: "NearbyShare",
+              name: "Quick Share",
+              extra: {}
+            },
+            {
+              guid: "{C601E9A4-03B0-4188-843E-80058BF16EF9}",
+              tag: "GPG_Developer_Emulator_Stable",
+              name: "Google Play Games Developer Emulator Stable",
+              extra: { ap: "prod" }
+            }
+          ];
+
+          function makeRequest(body) {
+            return new Promise((resolve, reject) => {
+              const postData = JSON.stringify(body);
+              
+              const options = {
+                hostname: 'update.googleapis.com',
+                path: '/service/update2/json',
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Content-Length': Buffer.byteLength(postData)
+                }
+              };
+
+              const req = https.request(options, (res) => {
+                let data = '';
+                res.on('data', (chunk) => { data += chunk; });
+                res.on('end', () => {
+                  if (res.statusCode === 200) {
+                    // Remove safe JSON prefix )]}'\n
+                    const jsonData = data.substring(5);
+                    resolve(JSON.parse(jsonData));
+                  } else {
+                    reject(new Error(`HTTP ${res.statusCode}`));
+                  }
+                });
+              });
+
+              req.on('error', reject);
+              req.write(postData);
+              req.end();
+            });
+          }
+
+          async function fetchStableVersions() {
+            const results = [];
+            
+            for (const app of apps) {
+              // Only fetch for stable versions (skip Beta, Dev, Canary)
+              if (!app.tag.includes('Stable') && !app.tag.includes('Share')) {
+                continue;
+              }
+
+              const body = {
+                request: {
+                  "@os": "win",
+                  "@updater": "updater",
+                  "acceptformat": "exe",
+                  "app": [{
+                    appid: app.guid,
+                    updatecheck: {},
+                    version: "0.0.0.0",
+                    ...app.extra
+                  }],
+                  "arch": "x64",
+                  "dedup": "cr",
+                  "protocol": "3.1",
+                  "ismachine": 1,
+                  "os": {
+                    arch: "x64",
+                    platform: "win",
+                    version: "10.0.22622.0"
+                  }
+                }
+              };
+
+              try {
+                const response = await makeRequest(body);
+                const appResponse = response.response.app[0];
+                
+                if (appResponse.updatecheck.status === "ok") {
+                  const updatecheck = appResponse.updatecheck;
+                  const version = updatecheck.manifest.version;
+                  const url = updatecheck.urls.url.find(u => 
+                    u.codebase.startsWith("https://dl.google.com")
+                  ) || updatecheck.urls.url[0];
+                  const pkg = updatecheck.manifest.packages.package[0];
+                  
+                  results.push({
+                    name: app.name,
+                    tag: app.tag,
+                    version: version,
+                    appid: app.guid,
+                    cohortname: appResponse.cohortname || "Stable",
+                    arguments: updatecheck.manifest.arguments || "",
+                    download: url.codebase + pkg.name,
+                    size: parseInt(pkg.size),
+                    sha256: pkg.hash_sha256
+                  });
+                }
+              } catch (error) {
+                console.error(`Error fetching ${app.name}:`, error.message);
+              }
+            }
+            
+            return results;
+          }
+
+          fetchStableVersions().then(results => {
+            fs.writeFileSync('data.json', JSON.stringify(results, null, 2));
+            console.log('Data saved to data.json');
+            
+            // Output for GitHub Actions
+            if (results.length > 0) {
+              console.log(`::set-output name=has_updates::true`);
+              console.log(`::set-output name=version::${results[0].version}`);
+            } else {
+              console.log(`::set-output name=has_updates::false`);
+            }
+          }).catch(error => {
+            console.error('Fatal error:', error);
+            process.exit(1);
+          });
+          EOF
+          
+          node fetch-stable.js
+          
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git diff --exit-code data.json || echo "changed=true" >> $GITHUB_OUTPUT
+          
+      - name: Commit and push data.json
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          git commit -m "Update stable versions data - $(date +'%Y-%m-%d')"
+          git push
+          
+      # Disabled: Auto create release
+      # - name: Create release with installers
+      #   if: steps.check_changes.outputs.changed == 'true'
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     # Get current date for tag
+      #     TAG_NAME=$(date +'%Y%m%d')
+      #     
+      #     # Check if tag already exists
+      #     if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
+      #       echo "Tag $TAG_NAME already exists, skipping release"
+      #       exit 0
+      #     fi
+      #     
+      #     # Create release notes from data.json
+      #     cat > release_notes.md << 'EOF'
+      #     # Stable Version Updates
+      #     
+      #     This release contains the latest stable versions of Google products.
+      #     
+      #     ## Versions
+      #     EOF
+      #     
+      #     node -e "
+      #     const data = require('./data.json');
+      #     data.forEach(item => {
+      #       console.log(\`- **\${item.name}**: v\${item.version}\`);
+      #     });
+      #     " >> release_notes.md
+      #     
+      #     # Create GitHub release
+      #     gh release create "$TAG_NAME" \
+      #       --title "Stable Versions - $(date +'%Y-%m-%d')" \
+      #       --notes-file release_notes.md
+      #       
+      #     # Download and attach installers for Chrome Stable only
+      #     node -e "
+      #     const https = require('https');
+      #     const fs = require('fs');
+      #     const data = require('./data.json');
+      #     
+      #     const chromeStable = data.find(item => item.tag === 'ChromeStable');
+      #     if (!chromeStable) {
+      #       console.log('Chrome Stable not found');
+      #       process.exit(0);
+      #     }
+      #     
+      #     const url = chromeStable.download;
+      #     const filename = url.split('/').pop();
+      #     
+      #     console.log('Downloading:', filename);
+      #     
+      #     https.get(url, (response) => {
+      #       if (response.statusCode === 302 || response.statusCode === 301) {
+      #         // Follow redirect
+      #         https.get(response.headers.location, (res) => {
+      #           const file = fs.createWriteStream(filename);
+      #           res.pipe(file);
+      #           file.on('finish', () => {
+      #             file.close();
+      #             console.log('Downloaded:', filename);
+      #           });
+      #         });
+      #       } else {
+      #         const file = fs.createWriteStream(filename);
+      #         response.pipe(file);
+      #         file.on('finish', () => {
+      #           file.close();
+      #           console.log('Downloaded:', filename);
+      #         });
+      #       }
+      #     }).on('error', (err) => {
+      #       console.error('Download failed:', err.message);
+      #     });
+      #     " || echo "Download skipped or failed"
+      #     
+      #     # Wait a bit for download to complete (if any)
+      #     sleep 10
+      #     
+      #     # Upload installers if they exist
+      #     for file in *.exe; do
+      #       if [ -f "$file" ]; then
+      #         echo "Uploading $file to release..."
+      #         gh release upload "$TAG_NAME" "$file" || echo "Upload failed for $file"
+      #       fi
+      #     done
