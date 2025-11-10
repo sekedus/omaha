@@ -6,7 +6,7 @@ This project is a fork of [chsbuffer/omaha2tg](https://github.com/chsbuffer/omah
 
 ## Screenshot
 
-![Google Product Update Checker](./omaha.png)
+![Google Product Update Checker](./assets/omaha.png)
 
 ## Features
 
