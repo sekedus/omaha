@@ -12,6 +12,8 @@
             --border-color: #ddd;
             --primary-color: #4285f4;
             --primary-hover: #357ae8;
+            --primary-disabled: #ccc;
+            --link-color: #0000ee;
             --code-bg: #f4f4f4;
             --info-text: #666;
             --error-bg: #ffebee;
@@ -22,11 +24,13 @@
 
         [data-theme="dark"] {
             --bg-color: #1a1a1a;
-            --text-color: #e0e0e0;
+            --text-color: #e3e3e3;
             --card-bg: #2d2d2d;
             --border-color: #444;
-            --primary-color: #5a9bff;
-            --primary-hover: #4285f4;
+            --primary-color: #2f70a5;
+            --primary-hover: #3478ab;
+            --primary-disabled: #242f3d;
+            --link-color: #64b5ef;
             --code-bg: #3a3a3a;
             --info-text: #b0b0b0;
             --error-bg: #4a1a1a;
@@ -75,7 +79,7 @@
             border: 2px solid var(--border-color);
             color: var(--text-color);
             cursor: pointer;
-            padding: 8px 12px;
+            padding: 5px 8px;
             border-radius: 4px;
             font-size: 20px;
             transition: all 0.3s;
@@ -124,7 +128,7 @@
         }
 
         button:disabled {
-            background-color: #ccc;
+            background-color: var(--primary-disabled);
             cursor: not-allowed;
         }
 
@@ -211,7 +215,7 @@
         }
 
         .download-link {
-            color: var(--primary-color);
+            color: var(--link-color);
             text-decoration: none;
         }
 
