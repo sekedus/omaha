@@ -206,89 +206,90 @@ jobs:
           git commit -m "Update stable versions data - $(date +'%Y-%m-%d')"
           git push
           
-      - name: Create release with installers
-        if: steps.check_changes.outputs.changed == 'true'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # Get current date for tag
-          TAG_NAME=$(date +'%Y%m%d')
-          
-          # Check if tag already exists
-          if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
-            echo "Tag $TAG_NAME already exists, skipping release"
-            exit 0
-          fi
-          
-          # Create release notes from data.json
-          cat > release_notes.md << 'EOF'
-          # Stable Version Updates
-          
-          This release contains the latest stable versions of Google products.
-          
-          ## Versions
-          EOF
-          
-          node -e "
-          const data = require('./data.json');
-          data.forEach(item => {
-            console.log(\`- **\${item.name}**: v\${item.version}\`);
-          });
-          " >> release_notes.md
-          
-          # Create GitHub release
-          gh release create "$TAG_NAME" \
-            --title "Stable Versions - $(date +'%Y-%m-%d')" \
-            --notes-file release_notes.md
-            
-          # Download and attach installers for Chrome Stable only
-          node -e "
-          const https = require('https');
-          const fs = require('fs');
-          const data = require('./data.json');
-          
-          const chromeStable = data.find(item => item.tag === 'ChromeStable');
-          if (!chromeStable) {
-            console.log('Chrome Stable not found');
-            process.exit(0);
-          }
-          
-          const url = chromeStable.download;
-          const filename = url.split('/').pop();
-          
-          console.log('Downloading:', filename);
-          
-          https.get(url, (response) => {
-            if (response.statusCode === 302 || response.statusCode === 301) {
-              // Follow redirect
-              https.get(response.headers.location, (res) => {
-                const file = fs.createWriteStream(filename);
-                res.pipe(file);
-                file.on('finish', () => {
-                  file.close();
-                  console.log('Downloaded:', filename);
-                });
-              });
-            } else {
-              const file = fs.createWriteStream(filename);
-              response.pipe(file);
-              file.on('finish', () => {
-                file.close();
-                console.log('Downloaded:', filename);
-              });
-            }
-          }).on('error', (err) => {
-            console.error('Download failed:', err.message);
-          });
-          " || echo "Download skipped or failed"
-          
-          # Wait a bit for download to complete (if any)
-          sleep 10
-          
-          # Upload installers if they exist
-          for file in *.exe; do
-            if [ -f "$file" ]; then
-              echo "Uploading $file to release..."
-              gh release upload "$TAG_NAME" "$file" || echo "Upload failed for $file"
-            fi
-          done
+      # Disabled: Auto create release
+      # - name: Create release with installers
+      #   if: steps.check_changes.outputs.changed == 'true'
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     # Get current date for tag
+      #     TAG_NAME=$(date +'%Y%m%d')
+      #     
+      #     # Check if tag already exists
+      #     if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
+      #       echo "Tag $TAG_NAME already exists, skipping release"
+      #       exit 0
+      #     fi
+      #     
+      #     # Create release notes from data.json
+      #     cat > release_notes.md << 'EOF'
+      #     # Stable Version Updates
+      #     
+      #     This release contains the latest stable versions of Google products.
+      #     
+      #     ## Versions
+      #     EOF
+      #     
+      #     node -e "
+      #     const data = require('./data.json');
+      #     data.forEach(item => {
+      #       console.log(\`- **\${item.name}**: v\${item.version}\`);
+      #     });
+      #     " >> release_notes.md
+      #     
+      #     # Create GitHub release
+      #     gh release create "$TAG_NAME" \
+      #       --title "Stable Versions - $(date +'%Y-%m-%d')" \
+      #       --notes-file release_notes.md
+      #       
+      #     # Download and attach installers for Chrome Stable only
+      #     node -e "
+      #     const https = require('https');
+      #     const fs = require('fs');
+      #     const data = require('./data.json');
+      #     
+      #     const chromeStable = data.find(item => item.tag === 'ChromeStable');
+      #     if (!chromeStable) {
+      #       console.log('Chrome Stable not found');
+      #       process.exit(0);
+      #     }
+      #     
+      #     const url = chromeStable.download;
+      #     const filename = url.split('/').pop();
+      #     
+      #     console.log('Downloading:', filename);
+      #     
+      #     https.get(url, (response) => {
+      #       if (response.statusCode === 302 || response.statusCode === 301) {
+      #         // Follow redirect
+      #         https.get(response.headers.location, (res) => {
+      #           const file = fs.createWriteStream(filename);
+      #           res.pipe(file);
+      #           file.on('finish', () => {
+      #             file.close();
+      #             console.log('Downloaded:', filename);
+      #           });
+      #         });
+      #       } else {
+      #         const file = fs.createWriteStream(filename);
+      #         response.pipe(file);
+      #         file.on('finish', () => {
+      #           file.close();
+      #           console.log('Downloaded:', filename);
+      #         });
+      #       }
+      #     }).on('error', (err) => {
+      #       console.error('Download failed:', err.message);
+      #     });
+      #     " || echo "Download skipped or failed"
+      #     
+      #     # Wait a bit for download to complete (if any)
+      #     sleep 10
+      #     
+      #     # Upload installers if they exist
+      #     for file in *.exe; do
+      #       if [ -f "$file" ]; then
+      #         echo "Uploading $file to release..."
+      #         gh release upload "$TAG_NAME" "$file" || echo "Upload failed for $file"
+      #       fi
+      #     done

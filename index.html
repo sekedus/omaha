@@ -244,6 +244,31 @@
             resize: vertical;
         }
 
+        /* Dark scrollbar for webkit browsers */
+        [data-theme="dark"] ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+
+        [data-theme="dark"] ::-webkit-scrollbar-track {
+            background: var(--card-bg);
+        }
+
+        [data-theme="dark"] ::-webkit-scrollbar-thumb {
+            background: #555;
+            border-radius: 6px;
+        }
+
+        [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+            background: #666;
+        }
+
+        /* Dark scrollbar for Firefox */
+        [data-theme="dark"] * {
+            scrollbar-width: thin;
+            scrollbar-color: #555 var(--card-bg);
+        }
+
         .response-section {
             margin: 20px 0;
         }

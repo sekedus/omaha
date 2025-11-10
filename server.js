@@ -16,74 +16,72 @@ const mimeTypes = {
 const MOCK_MODE = process.env.MOCK_MODE === 'true';
 
 function getMockResponse(requestBody) {
-    // Parse the request to see how many apps were requested
-    let apps = [];
     try {
+        // Load mock data from mock.json file
+        const mockFilePath = path.join(__dirname, 'mock.json');
+        const mockData = JSON.parse(fs.readFileSync(mockFilePath, 'utf8'));
+        
+        // Parse the request to see which apps were requested
         const parsed = JSON.parse(requestBody);
         const requestedApps = parsed.request.app || [];
         
-        // Create mock responses for each requested app
-        apps = requestedApps.map(app => ({
-            appid: app.appid,
-            cohortname: "Stable",
-            status: "ok",
-            updatecheck: {
-                status: "ok",
-                urls: {
-                    url: [{
-                        codebase: "https://dl.google.com/chrome/install/"
-                    }]
-                },
-                manifest: {
-                    version: "131.0.6778.86",
-                    packages: {
-                        package: [{
-                            name: "installer.exe",
-                            required: true,
-                            size: "149123456",
-                            hash_sha256: "abc123def456789abc123def456789abc123def456789abc123def456789abc1"
-                        }]
-                    }
+        // If a single app was requested, find it in the mock data
+        if (requestedApps.length === 1) {
+            const requestedAppId = requestedApps[0].appid;
+            
+            // Find the response containing this app
+            for (const mockResponse of mockData) {
+                const app = mockResponse.response.app.find(a => a.appid === requestedAppId);
+                if (app) {
+                    const response = {
+                        response: {
+                            server: mockResponse.response.server,
+                            protocol: mockResponse.response.protocol,
+                            daystart: mockResponse.response.daystart,
+                            app: [app]
+                        }
+                    };
+                    return ')]}\'\n' + JSON.stringify(response);
                 }
             }
-        }));
-    } catch (e) {
-        // Fallback to single app
-        apps = [{
-            appid: "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
-            cohortname: "Stable",
-            status: "ok",
-            updatecheck: {
-                status: "ok",
-                urls: {
-                    url: [{
-                        codebase: "https://dl.google.com/chrome/install/"
-                    }]
-                },
-                manifest: {
-                    version: "131.0.6778.86",
-                    packages: {
-                        package: [{
-                            name: "installer.exe",
-                            required: true,
-                            size: "149123456",
-                            hash_sha256: "abc123def456789abc123def456789abc123def456789abc123def456789abc1"
-                        }]
-                    }
-                }
-            }
-        }];
-    }
-    
-    const response = {
-        response: {
-            protocol: "3.1",
-            app: apps
         }
-    };
-    
-    // Return with safe JSON prefix (includes newline)
-    return ')]}\'\n' + JSON.stringify(response);
+        
+        // Return the first response (contains all main Chrome apps) for multiple requests
+        return ')]}\'\n' + JSON.stringify(mockData[0]);
+    } catch (e) {
+        console.error('Error loading mock data:', e);
+        // Fallback to a simple response
+        const fallbackResponse = {
+            response: {
+                protocol: "3.1",
+                app: [{
+                    appid: "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
+                    status: "ok",
+                    cohortname: "Stable",
+                    updatecheck: {
+                        status: "ok",
+                        urls: {
+                            url: [{
+                                codebase: "https://dl.google.com/chrome/install/"
+                            }]
+                        },
+                        manifest: {
+                            version: "131.0.6778.86",
+                            packages: {
+                                package: [{
+                                    name: "installer.exe",
+                                    required: true,
+                                    size: "149123456",
+                                    hash_sha256: "abc123def456789abc123def456789abc123def456789abc123def456789abc1"
+                                }]
+                            }
+                        }
+                    }
+                }]
+            }
+        };
+        return ')]}\'\n' + JSON.stringify(fallbackResponse);
+    }
 }
 
 function proxyRequest(req, res) {
