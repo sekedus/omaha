@@ -348,7 +348,7 @@ function toggleTheme() {
     const currentTheme = html.getAttribute('data-theme');
     
     if (currentTheme === 'dark') {
-        html.removeAttribute('data-theme');
+        html.setAttribute('data-theme', 'light');
         themeToggle.textContent = '🌙';
         localStorage.setItem('theme', 'light');
     } else {

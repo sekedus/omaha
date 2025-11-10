@@ -6,7 +6,7 @@ This project is a fork of [chsbuffer/omaha2tg](https://github.com/chsbuffer/omah
 
 ## Screenshot
 
-![Google Product Update Checker](https://github.com/user-attachments/assets/76698d83-d9ba-40f3-a0a3-8993bf5d1e47)
+![Google Product Update Checker](./omaha.png)
 
 ## Features
 
@@ -76,7 +76,7 @@ This project is a fork of [chsbuffer/omaha2tg](https://github.com/chsbuffer/omah
 For testing or development when the API is unavailable, you can run the server in mock mode:
 
 ```bash
-MOCK_MODE=true npm start
+npm run start:mock
 ```
 
 This will return sample data instead of querying the actual API.
