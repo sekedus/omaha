@@ -121,10 +121,10 @@ The application includes several security measures:
 
 This project follows the same license as the original [chsbuffer/omaha2tg](https://github.com/chsbuffer/omaha2tg) repository.
 
-## Contributing
+<!-- ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Support
 
-For issues, questions, or suggestions, please [open an issue](https://github.com/sekedus/omaha/issues) on GitHub.
+For issues, questions, or suggestions, please [open an issue](https://github.com/sekedus/omaha/issues) on GitHub. -->
