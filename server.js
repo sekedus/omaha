@@ -205,9 +205,15 @@ const server = http.createServer((req, res) => {
     });
 });
 
-server.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}/`);
-    if (MOCK_MODE) {
-        console.log('Running in MOCK mode - using sample data');
-    }
-});
+// Export the proxyRequest function for use in Vercel serverless functions
+module.exports = { proxyRequest };
+
+// Only start the server if this file is run directly (not imported)
+if (require.main === module) {
+    server.listen(PORT, () => {
+        console.log(`Server running at http://localhost:${PORT}/`);
+        if (MOCK_MODE) {
+            console.log('Running in MOCK mode - using sample data');
+        }
+    });
+}

@@ -81,15 +81,56 @@ npm run start:mock
 
 This will return sample data instead of querying the actual API.
 
+## Deployment to Vercel
+
+This application is ready to be deployed to Vercel with zero configuration:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/sekedus/omaha)
+
+### Manual Deployment
+
+1. **Install Vercel CLI** (optional)
+   ```bash
+   npm install -g vercel
+   ```
+
+2. **Deploy to Vercel**
+   ```bash
+   vercel
+   ```
+
+3. **Follow the prompts**
+   - Link to existing project or create new one
+   - Select the root directory
+   - No build command needed
+   - No output directory needed
+
+The application will automatically:
+- Serve static files (`index.html`, `app.js`)
+- Deploy the API endpoint as a serverless function (`/api/update`)
+- Configure CORS headers for the proxy
+
+### Environment Variables
+
+If you want to enable mock mode on Vercel (for testing):
+
+1. Go to your Vercel project settings
+2. Add environment variable: `MOCK_MODE=true`
+3. Redeploy the application
+
 ## File Structure
 
 ```
 omaha/
-├── index.html      # Main HTML file with styles
-├── app.js          # JavaScript application logic
-├── server.js       # Node.js HTTP server with CORS proxy
-├── package.json    # Node.js dependencies and scripts
-└── README.md       # This file
+├── api/
+│   └── update.js    # Vercel serverless function (uses server.js)
+├── index.html       # Main HTML file with styles
+├── app.js           # JavaScript application logic
+├── server.js        # Node.js HTTP server with CORS proxy (for local dev & Vercel)
+├── mock.json        # Mock data for testing
+├── vercel.json      # Vercel deployment configuration
+├── package.json     # Node.js dependencies and scripts
+└── README.md        # This file
 ```
 
 ## Development
