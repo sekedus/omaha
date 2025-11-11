@@ -350,16 +350,16 @@ function toggleTheme() {
     if (currentTheme === 'dark') {
         html.setAttribute('data-theme', 'light');
         themeToggle.textContent = '🌙';
-        localStorage.setItem('theme', 'light');
+        localStorage.setItem('omaha_theme', 'light');
     } else {
         html.setAttribute('data-theme', 'dark');
         themeToggle.textContent = '☀️';
-        localStorage.setItem('theme', 'dark');
+        localStorage.setItem('omaha_theme', 'dark');
     }
 }
 
 function initTheme() {
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme = localStorage.getItem('omaha_theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const themeToggle = document.getElementById('themeToggle');
     
