@@ -123,10 +123,10 @@ If you want to enable mock mode on Vercel (for testing):
 ```
 omaha/
 ├── api/
-│   └── update.js    # Vercel serverless function for proxy endpoint
+│   └── update.js    # Vercel serverless function (uses server.js)
 ├── index.html       # Main HTML file with styles
 ├── app.js           # JavaScript application logic
-├── server.js        # Node.js HTTP server with CORS proxy (for local dev)
+├── server.js        # Node.js HTTP server with CORS proxy (for local dev & Vercel)
 ├── mock.json        # Mock data for testing
 ├── vercel.json      # Vercel deployment configuration
 ├── package.json     # Node.js dependencies and scripts
