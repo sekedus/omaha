@@ -179,11 +179,13 @@ jobs:
             
             // Output for GitHub Actions
             const output = process.env.GITHUB_OUTPUT;
-            if (results.length > 0) {
-              fs.appendFileSync(output, `has_updates=true\n`);
-              fs.appendFileSync(output, `version=${results[0].version}\n`);
-            } else {
-              fs.appendFileSync(output, `has_updates=false\n`);
+            if (output) {
+              if (results.length > 0) {
+                fs.appendFileSync(output, `has_updates=true\n`);
+                fs.appendFileSync(output, `version=${results[0].version}\n`);
+              } else {
+                fs.appendFileSync(output, `has_updates=false\n`);
+              }
             }
           }).catch(error => {
             console.error('Fatal error:', error);
