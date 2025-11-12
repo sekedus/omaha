@@ -178,11 +178,12 @@ jobs:
             console.log('Data saved to data.json');
             
             // Output for GitHub Actions
+            const output = process.env.GITHUB_OUTPUT;
             if (results.length > 0) {
-              console.log(`::set-output name=has_updates::true`);
-              console.log(`::set-output name=version::${results[0].version}`);
+              fs.appendFileSync(output, `has_updates=true\n`);
+              fs.appendFileSync(output, `version=${results[0].version}\n`);
             } else {
-              console.log(`::set-output name=has_updates::false`);
+              fs.appendFileSync(output, `has_updates=false\n`);
             }
           }).catch(error => {
             console.error('Fatal error:', error);
