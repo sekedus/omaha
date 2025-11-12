@@ -198,7 +198,16 @@ jobs:
       - name: Check for changes
         id: check_changes
         run: |
-          git diff --exit-code data.json || echo "changed=true" >> $GITHUB_OUTPUT
+          # Check if data.json has changes (modified) or is new (untracked)
+          if [ -f data.json ] && ! git ls-files --error-unmatch data.json > /dev/null 2>&1; then
+            # File exists but is not tracked - it's new
+            echo "changed=true" >> $GITHUB_OUTPUT
+          elif git ls-files --error-unmatch data.json > /dev/null 2>&1; then
+            # File is tracked, check if it has changes
+            if ! git diff --exit-code data.json > /dev/null 2>&1; then
+              echo "changed=true" >> $GITHUB_OUTPUT
+            fi
+          fi
           
       - name: Commit and push data.json
         if: steps.check_changes.outputs.changed == 'true'
