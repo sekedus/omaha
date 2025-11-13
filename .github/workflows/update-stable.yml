@@ -114,7 +114,7 @@ jobs:
             
             for (const app of apps) {
               // Only fetch for stable versions (skip Beta, Dev, Canary)
-              if (!app.tag.includes('Stable') && !app.tag.includes('Share')) {
+              if (!app.tag.includes('Stable') && !app.tag.match(/Share|PlayGames/i)) {
                 continue;
               }
 
@@ -178,11 +178,14 @@ jobs:
             console.log('Data saved to data.json');
             
             // Output for GitHub Actions
-            if (results.length > 0) {
-              console.log(`::set-output name=has_updates::true`);
-              console.log(`::set-output name=version::${results[0].version}`);
-            } else {
-              console.log(`::set-output name=has_updates::false`);
+            const output = process.env.GITHUB_OUTPUT;
+            if (output) {
+              if (results.length > 0) {
+                fs.appendFileSync(output, `has_updates=true\n`);
+                fs.appendFileSync(output, `version=${results[0].version}\n`);
+              } else {
+                fs.appendFileSync(output, `has_updates=false\n`);
+              }
             }
           }).catch(error => {
             console.error('Fatal error:', error);
@@ -195,7 +198,16 @@ jobs:
       - name: Check for changes
         id: check_changes
         run: |
-          git diff --exit-code data.json || echo "changed=true" >> $GITHUB_OUTPUT
+          # Check if data.json has changes (modified) or is new (untracked)
+          if [ -f data.json ] && ! git ls-files --error-unmatch data.json > /dev/null 2>&1; then
+            # File exists but is not tracked - it's new
+            echo "changed=true" >> $GITHUB_OUTPUT
+          elif git ls-files --error-unmatch data.json > /dev/null 2>&1; then
+            # File is tracked, check if it has changes
+            if ! git diff --exit-code data.json > /dev/null 2>&1; then
+              echo "changed=true" >> $GITHUB_OUTPUT
+            fi
+          fi
           
       - name: Commit and push data.json
         if: steps.check_changes.outputs.changed == 'true'
