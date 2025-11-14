@@ -158,6 +158,8 @@ jobs:
                     tag: app.tag,
                     appid: app.guid,
                     version: version,
+                    cohortname: appResponse.cohortname || "Stable",
+                    arguments: updatecheck.manifest.arguments || "",
                     download: url.codebase + pkg.name,
                     size: parseInt(pkg.size),
                     sha256: pkg.hash_sha256
