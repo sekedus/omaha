@@ -17,67 +17,84 @@ const MOCK_MODE = process.env.MOCK_MODE === 'true';
 
 function getMockResponse(requestBody) {
     try {
-        // Load mock data from mock.json file
         const mockFilePath = path.join(__dirname, 'mock.json');
         const mockData = JSON.parse(fs.readFileSync(mockFilePath, 'utf8'));
-        
+
         // Parse the request to see which apps were requested
         const parsed = JSON.parse(requestBody);
         const requestedApps = parsed.request.app || [];
-        
-        // If a single app was requested, find it in the mock data
-        if (requestedApps.length === 1) {
-            const requestedAppId = requestedApps[0].appid;
-            
-            // Find the response containing this app
+        const requestedAppIds = requestedApps.map(a => a.appid);
+
+        // Collect all matching apps from all mock responses, preserving requested order
+        const foundApps = [];
+        let baseResponse = mockData[0]?.response || {};
+
+        for (const appid of requestedAppIds) {
             for (const mockResponse of mockData) {
-                const app = mockResponse.response.app.find(a => a.appid === requestedAppId);
+                const app = mockResponse.response.app.find(a => a.appid === appid);
                 if (app) {
-                    const response = {
-                        response: {
-                            server: mockResponse.response.server,
-                            protocol: mockResponse.response.protocol,
-                            daystart: mockResponse.response.daystart,
-                            app: [app]
-                        }
-                    };
-                    return ')]}\'\n' + JSON.stringify(response);
+                    foundApps.push(app);
+                    break;
                 }
             }
         }
-        
-        // Return the first response (contains all main Chrome apps) for multiple requests
-        return ')]}\'\n' + JSON.stringify(mockData[0]);
+
+        // If no apps found, fallback to first response
+        if (foundApps.length === 0) {
+            return ')]}\'\n' + JSON.stringify(mockData[0]);
+        }
+
+        // Build response with only requested apps
+        const response = {
+            response: {
+                server: baseResponse.server,
+                protocol: baseResponse.protocol,
+                daystart: baseResponse.daystart,
+                app: foundApps
+            }
+        };
+        return ')]}\'\n' + JSON.stringify(response);
     } catch (e) {
         console.error('Error loading mock data:', e);
-        // Fallback to a simple response
+        // Fallback to a simple response, matching requested appids
+        let requestedAppIds = [];
+        try {
+            const parsed = JSON.parse(requestBody);
+            requestedAppIds = (parsed.request.app || []).map(a => a.appid);
+        } catch {
+            // If requestBody can't be parsed, fallback to single app
+            requestedAppIds = ["{8A69D345-D564-463C-AFF1-A69D9E530F96}"];
+        }
+
+        const fallbackApp = {
+            appid: "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
+            status: "ok",
+            cohortname: "Stable Installs & Version Pins",
+            updatecheck: {
+                status: "ok",
+                urls: {
+                    url: [{
+                        codebase: "https://dl.google.com/release2/chrome/ad5a3xxkus553yasirdsiqukwr5a_128.0.6613.120/"
+                    }]
+                },
+                manifest: {
+                    version: "128.0.6613.120",
+                    packages: {
+                        package: [{
+                            name: "128.0.6613.120_chrome_installer.exe",
+                            required: true,
+                            size: "112086904",
+                            hash_sha256: "8e8c40ec86f98c71c5330af52bb20f0dcb6391f7931551bc8eb189201605dc34"
+                        }]
+                    }
+                }
+            }
+        };
+
         const fallbackResponse = {
             response: {
                 protocol: "3.1",
-                app: [{
-                    appid: "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
-                    status: "ok",
-                    cohortname: "Stable",
-                    updatecheck: {
-                        status: "ok",
-                        urls: {
-                            url: [{
-                                codebase: "https://dl.google.com/chrome/install/"
-                            }]
-                        },
-                        manifest: {
-                            version: "131.0.6778.86",
-                            packages: {
-                                package: [{
-                                    name: "installer.exe",
-                                    required: true,
-                                    size: "149123456",
-                                    hash_sha256: "abc123def456789abc123def456789abc123def456789abc123def456789abc1"
-                                }]
-                            }
-                        }
-                    }
-                }]
+                app: requestedAppIds.map(appid => ({ ...fallbackApp, appid }))
             }
         };
         return ')]}\'\n' + JSON.stringify(fallbackResponse);

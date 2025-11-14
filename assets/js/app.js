@@ -9,45 +9,20 @@ const apps = [
         guid: "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
         flavors: [
             {
-                tag: "ChromeStable",
+                tag: "Google_Chrome",
                 name: "Google Chrome",
+                arch: "x86",
                 extra: {
-                    ap: "x64-stable-statsdef_1",
+                    ap: "x86-stable-statsdef_1"
                 }
-            }
-        ]
-    },
-    {
-        guid: "{8237E44A-0054-442C-B6B6-EA0509993955}",
-        flavors: [
+            },
             {
-                tag: "ChromeBeta",
-                name: "Google Chrome Beta",
-            }
-        ]
-    },
-    {
-        guid: "{401C381F-E0DE-4B85-8BD8-3F3F14FBDA57}",
-        flavors: [
-            {
-                tag: "ChromeDev",
-                name: "Google Chrome Dev",
+                tag: "Google_Chrome_64",
+                name: "Google Chrome",
+                arch: "x64",
                 extra: {
-                    ap: "-arch_x64-statsdef_1",
-                },
-            }
-        ]
-    },
-    {
-        guid: "{4EA16AC7-FD5A-47C3-875B-DBF4A2008C20}",
-        flavors: [
-            {
-                tag: "ChromeCanary",
-                name: "Google Chrome Canary",
-                extra: {
-                    cohort: "1:jn:1ojl@0.05",
-                    ap: "x64-canary-statsdef_1",
-                },
+                    ap: "x64-stable-statsdef_1"
+                }
             }
         ]
     },
@@ -55,20 +30,12 @@ const apps = [
         guid: "{47B07D71-505D-4665-AFD4-4972A30C6530}",
         flavors: [
             {
-                tag: "PlayGames",
+                tag: "Google_Play_Games_Beta",
                 name: "Google Play Games Beta",
+                arch: "x64",
                 extra: {
-                    ap: "beta",
-                },
-            }
-        ]
-    },
-    {
-        guid: "{232066FE-FF4D-4C25-83B4-3F8747CF7E3A}",
-        flavors: [
-            {
-                tag: "NearbyShare",
-                name: "Quick Share",
+                    ap: "beta"
+                }
             }
         ]
     },
@@ -78,29 +45,48 @@ const apps = [
             {
                 tag: "GPG_Developer_Emulator_Stable",
                 name: "Google Play Games Developer Emulator Stable",
+                arch: "x64",
                 extra: {
-                    ap: "prod",
-                },
+                    ap: "prod"
+                }
+            },
+        ]
+    },
+    {
+        guid: "{232066FE-FF4D-4C25-83B4-3F8747CF7E3A}",
+        flavors: [
+            {
+                tag: "Nearby_Better_Together",
+                name: "Quick Share",
+                arch: "x64"
+            }
+        ]
+    },
+    {
+        guid: "{65E60E95-0DE9-43FF-9F3F-4F7D2DFF04B5}",
+        flavors: [
+            {
+                tag: "Google_Earth_Pro",
+                name: "Google Earth Pro",
+                arch: "x86"
             },
             {
-                tag: "GPG_Developer_Emulator_Beta",
-                name: "Google Play Games Developer Emulator Beta",
-                extra: {
-                    ap: "dogfood",
-                },
+                tag: "Google_Earth_Pro_64",
+                name: "Google Earth Pro",
+                arch: "x64"
             }
         ]
     },
 ];
 
-function defaultBody() {
+function defaultBody(arch) {
     return {
         request: {
             "@os": "win",
             "@updater": "updater",
             "acceptformat": "exe",
             "app": [],
-            "arch": "x64",
+            "arch": arch || "x86",
             "dedup": "cr",
             "domainjoined": false,
             "hw": {
@@ -113,14 +99,14 @@ function defaultBody() {
                 sse42: true,
                 ssse3: true,
             },
-            "ismachine": 1,
+            "ismachine": true,
             "os": {
-                arch: "x64",
+                arch: arch || "x86",
                 platform: "win",
-                version: "10.0.22622.0",
+                version: "10.0.19045.6456", // Windows 10 22H2 (Build 19045.6456) KB5066791
             },
-            "protocol": "3.1",
-        },
+            "protocol": "3.1"
+        }
     };
 }
 
@@ -132,66 +118,71 @@ async function updateCheckRequest(body) {
         },
         body: JSON.stringify(body),
     });
-    
+
     if (!resp.ok) {
         throw new Error(`POST update2 failed: ${resp.status} ${resp.statusText}`);
     }
-    
+
     const respText = await resp.text();
     return JSON.parse(respText.substring(5)); // remove Safe JSON Prefixes
 }
 
 async function fetchAllUpdates() {
+    const archs = Array.from(new Set(apps.flatMap(app => app.flavors.map(f => f.arch))));
     const allResults = [];
     const allResponses = [];
-    
-    // Ensure that app ids are not duplicated in each request.
-    const depth = Math.max(...apps.map(x => x.flavors.length));
-    
-    for (let i = 0; i < depth; i++) {
-        const body = defaultBody();
-        const flavors = [];
-        
-        for (const app of apps) {
-            const flavor = app.flavors[i];
-            if (!flavor) continue;
-            
-            flavors.push(flavor);
-            body.request.app.push({
-                appid: app.guid,
-                updatecheck: {},
-                version: "0.0.0.0",
-                ...flavor.extra,
+
+    // Map to keep results per app/flavor for ordering
+    const resultMap = new Map();
+
+    for (const arch of archs) {
+        const body = defaultBody(arch);
+        const archFlavors = [];
+
+        // Collect flavors for this arch, keep app/flavor index for ordering
+        apps.forEach((app, appIdx) => {
+            app.flavors.forEach((flavor, flavorIdx) => {
+                if (flavor.arch === arch) {
+                    archFlavors.push({ appIdx, flavorIdx, app, flavor });
+                    body.request.app.push({
+                        appid: app.guid,
+                        updatecheck: {},
+                        version: "0.0.0.0",
+                        ...flavor.extra,
+                    });
+                }
             });
-        }
-        
-        if (flavors.length === 0) continue;
-        
+        });
+
+        if (archFlavors.length === 0) continue;
+
         const response = await updateCheckRequest(body);
         allResponses.push(response);
-        
-        for (let j = 0; j < flavors.length; j++) {
-            const flavor = flavors[j];
+
+        for (let j = 0; j < archFlavors.length; j++) {
+            const { appIdx, flavorIdx, flavor } = archFlavors[j];
             const appResponse = response.response.app[j];
-            
+
             if (appResponse.updatecheck.status !== "ok") {
                 console.log(`No update for "${flavor.name}"`);
                 continue;
             }
-            
+
             const updatecheck = appResponse.updatecheck;
             const version = updatecheck.manifest.version;
             // Find URL from dl.google.com with exact match to avoid URL injection
             const url = updatecheck.urls.url.find(s => {
                 const codebase = s.codebase;
-                return codebase === "https://dl.google.com/" || 
-                       codebase.startsWith("https://dl.google.com/") && 
-                       new URL(codebase).hostname === "dl.google.com";
+                return codebase === "https://dl.google.com/" ||
+                    (codebase.startsWith("https://dl.google.com/") &&
+                        new URL(codebase).hostname === "dl.google.com");
             }) || updatecheck.urls.url[updatecheck.urls.url.length - 1];
             const pkg = updatecheck.manifest.packages.package[updatecheck.manifest.packages.package.length - 1];
-            
-            allResults.push({
-                name: flavor.name,
+
+            // Store result for ordering
+            const key = `${appIdx}-${flavorIdx}`;
+            resultMap.set(key, {
+                name: flavor.name + ` (${flavor.arch})`,
                 version: version,
                 channel: appResponse.cohortname || "N/A",
                 downloadUrl: url.codebase + pkg.name,
@@ -200,7 +191,17 @@ async function fetchAllUpdates() {
             });
         }
     }
-    
+
+    // Combine results in apps/flavors order
+    apps.forEach((app, appIdx) => {
+        app.flavors.forEach((flavor, flavorIdx) => {
+            const key = `${appIdx}-${flavorIdx}`;
+            if (resultMap.has(key)) {
+                allResults.push(resultMap.get(key));
+            }
+        });
+    });
+
     return { results: allResults, responses: allResponses };
 }
 
@@ -211,7 +212,7 @@ function formatBytes(bytes) {
 function displayResults(results) {
     const tbody = document.getElementById('tableBody');
     tbody.innerHTML = '';
-    
+
     results.forEach(result => {
         const row = tbody.insertRow();
         row.innerHTML = `
@@ -223,7 +224,7 @@ function displayResults(results) {
             <td data-label="SHA256"><code>${escapeHtml(result.sha256)}</code></td>
         `;
     });
-    
+
     document.getElementById('tableContainer').classList.remove('hidden');
     // Show the toggle response button when table is visible
     document.getElementById('toggleResponseBtn').classList.remove('hidden');
@@ -257,11 +258,11 @@ function saveToCache(data) {
 function loadFromCache() {
     const cachedData = localStorage.getItem(CACHE_KEY);
     const timestamp = localStorage.getItem(CACHE_TIMESTAMP_KEY);
-    
+
     if (!cachedData || !timestamp) return null;
-    
+
     const cacheAge = Date.now() - parseInt(timestamp);
-    
+
     if (cacheAge > CACHE_DURATION_MS) {
         // Cache expired - hide table, timestamp, and toggle button
         document.getElementById('tableContainer').classList.add('hidden');
@@ -269,7 +270,7 @@ function loadFromCache() {
         document.getElementById('toggleResponseBtn').classList.add('hidden');
         return null;
     }
-    
+
     return {
         data: JSON.parse(cachedData),
         timestamp: parseInt(timestamp)
@@ -280,20 +281,20 @@ async function fetchData() {
     const fetchBtn = document.getElementById('fetchBtn');
     const loading = document.getElementById('loading');
     const error = document.getElementById('error');
-    
+
     fetchBtn.disabled = true;
     loading.classList.remove('hidden');
     error.classList.add('hidden');
-    
+
     try {
         const { results, responses } = await fetchAllUpdates();
         const data = { results, responses };
-        
+
         const timestamp = saveToCache(data);
         displayResults(results);
         displayResponse(responses);
         updateLastUpdateInfo(timestamp);
-        
+
     } catch (err) {
         console.error('Error fetching data:', err);
         error.textContent = `Error: ${err.message}`;
@@ -307,10 +308,11 @@ async function fetchData() {
 function toggleResponse() {
     const responseSection = document.getElementById('responseSection');
     const toggleBtn = document.getElementById('toggleResponseBtn');
-    
+
     if (responseSection.classList.contains('hidden')) {
-        responseSection.classList.remove('hidden');
         toggleBtn.textContent = 'Hide POST Response';
+        responseSection.classList.remove('hidden');
+        responseSection.scrollIntoView({ behavior: 'smooth' });
     } else {
         responseSection.classList.add('hidden');
         toggleBtn.textContent = 'Show POST Response';
@@ -320,10 +322,10 @@ function toggleResponse() {
 function copyToClipboard() {
     const textarea = document.getElementById('responseText');
     const copyBtn = document.getElementById('copyBtn');
-    
+
     textarea.select();
     textarea.setSelectionRange(0, 99999); // For mobile devices
-    
+
     navigator.clipboard.writeText(textarea.value).then(() => {
         const originalText = copyBtn.textContent;
         copyBtn.textContent = 'Copied!';
@@ -346,7 +348,7 @@ function toggleTheme() {
     const html = document.documentElement;
     const themeToggle = document.getElementById('themeToggle');
     const currentTheme = html.getAttribute('data-theme');
-    
+
     if (currentTheme === 'dark') {
         html.setAttribute('data-theme', 'light');
         themeToggle.textContent = '🌙';
@@ -362,7 +364,7 @@ function initTheme() {
     const savedTheme = localStorage.getItem('omaha_theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const themeToggle = document.getElementById('themeToggle');
-    
+
     if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
         document.documentElement.setAttribute('data-theme', 'dark');
         themeToggle.textContent = '☀️';
@@ -374,12 +376,12 @@ function initTheme() {
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
-    
+
     document.getElementById('fetchBtn').addEventListener('click', fetchData);
     document.getElementById('toggleResponseBtn').addEventListener('click', toggleResponse);
     document.getElementById('copyBtn').addEventListener('click', copyToClipboard);
     document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-    
+
     // Try to load from cache
     const cached = loadFromCache();
     if (cached) {

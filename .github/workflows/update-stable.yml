@@ -1,4 +1,4 @@
-name: Update Stable Versions and Create Release
+name: Check Update and Create Release
 
 on:
   schedule:
@@ -33,45 +33,67 @@ jobs:
           const apps = [
             {
               guid: "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
-              tag: "ChromeStable",
-              name: "Google Chrome",
-              extra: { ap: "x64-stable-statsdef_1" }
-            },
-            {
-              guid: "{8237E44A-0054-442C-B6B6-EA0509993955}",
-              tag: "ChromeBeta",
-              name: "Google Chrome Beta",
-              extra: {}
-            },
-            {
-              guid: "{401C381F-E0DE-4B85-8BD8-3F3F14FBDA57}",
-              tag: "ChromeDev",
-              name: "Google Chrome Dev",
-              extra: { ap: "-arch_x64-statsdef_1" }
-            },
-            {
-              guid: "{4EA16AC7-FD5A-47C3-875B-DBF4A2008C20}",
-              tag: "ChromeCanary",
-              name: "Google Chrome Canary",
-              extra: { cohort: "1:jn:1ojl@0.05", ap: "x64-canary-statsdef_1" }
+              flavors: [
+                {
+                  tag: "Google_Chrome",
+                  name: "Google Chrome",
+                  arch: "x86",
+                  extra: { ap: "x86-stable-statsdef_1" }
+                },
+                {
+                  tag: "Google_Chrome_64",
+                  name: "Google Chrome x64",
+                  arch: "x64",
+                  extra: { ap: "x64-stable-statsdef_1" }
+                }
+              ]
             },
             {
               guid: "{47B07D71-505D-4665-AFD4-4972A30C6530}",
-              tag: "PlayGames",
-              name: "Google Play Games Beta",
-              extra: { ap: "beta" }
-            },
-            {
-              guid: "{232066FE-FF4D-4C25-83B4-3F8747CF7E3A}",
-              tag: "NearbyShare",
-              name: "Quick Share",
-              extra: {}
+              flavors: [
+                {
+                  tag: "Google_Play_Games_Beta",
+                  name: "Google Play Games Beta",
+                  arch: "x64",
+                  extra: { ap: "beta" }
+                }
+              ]
             },
             {
               guid: "{C601E9A4-03B0-4188-843E-80058BF16EF9}",
-              tag: "GPG_Developer_Emulator_Stable",
-              name: "Google Play Games Developer Emulator Stable",
-              extra: { ap: "prod" }
+              flavors: [
+                {
+                  tag: "GPG_Developer_Emulator_Stable",
+                  name: "Google Play Games Developer Emulator",
+                  arch: "x64",
+                  extra: { ap: "prod" }
+                }
+              ]
+            },
+            {
+              guid: "{232066FE-FF4D-4C25-83B4-3F8747CF7E3A}",
+              flavors: [
+                {
+                  tag: "Nearby_Better_Together",
+                  name: "Quick Share",
+                  arch: "x64"
+                }
+              ]
+            },
+            {
+              guid: "{65E60E95-0DE9-43FF-9F3F-4F7D2DFF04B5}",
+              flavors: [
+                {
+                  tag: "Google_Earth_Pro",
+                  name: "Google Earth Pro",
+                  arch: "x86"
+                },
+                {
+                  tag: "Google_Earth_Pro_64",
+                  name: "Google Earth Pro x64",
+                  arch: "x64"
+                }
+              ]
             }
           ];
 
@@ -113,60 +135,74 @@ jobs:
             const results = [];
             
             for (const app of apps) {
-              // Only fetch for stable versions (skip Beta, Dev, Canary)
-              if (!app.tag.includes('Stable') && !app.tag.match(/Share|PlayGames/i)) {
-                continue;
-              }
+              for (const flavor of app.flavors) {
 
-              const body = {
-                request: {
-                  "@os": "win",
-                  "@updater": "updater",
-                  "acceptformat": "exe",
-                  "app": [{
-                    appid: app.guid,
-                    updatecheck: {},
-                    version: "0.0.0.0",
-                    ...app.extra
-                  }],
-                  "arch": "x64",
-                  "dedup": "cr",
-                  "protocol": "3.1",
-                  "ismachine": 1,
-                  "os": {
-                    arch: "x64",
-                    platform: "win",
-                    version: "10.0.22622.0"
+                // // Only fetch for stable versions (skip Beta, Dev, Canary)
+                // if (!flavor.tag.includes('Stable') && !flavor.tag.match(/Share|PlayGames/i)) {
+                //   continue;
+                // }
+
+                const body = {
+                  request: {
+                    "@os": "win",
+                    "@updater": "updater",
+                    "acceptformat": "exe",
+                    "app": [{
+                      appid: app.guid,
+                      updatecheck: {},
+                      version: "0.0.0.0",
+                      ...flavor.extra
+                    }],
+                    "arch": flavor.arch,
+                    "dedup": "cr",
+                    "domainjoined": false,
+                    "hw": {
+                        avx: true,
+                        physmemory: 16,
+                        sse: true,
+                        sse2: true,
+                        sse3: true,
+                        sse41: true,
+                        sse42: true,
+                        ssse3: true,
+                    },
+                    "ismachine": true,
+                    "os": {
+                      arch: flavor.arch,
+                      platform: "win",
+                      version: "10.0.19045.6456", // Windows 10 22H2 (Build 19045.6456) KB5066791
+                    },
+                    "protocol": "3.1"
                   }
-                }
-              };
+                };
 
-              try {
-                const response = await makeRequest(body);
-                const appResponse = response.response.app[0];
-                
-                if (appResponse.updatecheck.status === "ok") {
-                  const updatecheck = appResponse.updatecheck;
-                  const version = updatecheck.manifest.version;
-                  const url = updatecheck.urls.url.find(u => 
-                    u.codebase.startsWith("https://dl.google.com")
-                  ) || updatecheck.urls.url[0];
-                  const pkg = updatecheck.manifest.packages.package[0];
-                  
-                  results.push({
-                    name: app.name,
-                    tag: app.tag,
-                    appid: app.guid,
-                    version: version,
-                    cohortname: appResponse.cohortname || "Stable",
-                    arguments: updatecheck.manifest.arguments || "",
-                    download: url.codebase + pkg.name,
-                    size: parseInt(pkg.size),
-                    sha256: pkg.hash_sha256
-                  });
+                try {
+                  const response = await makeRequest(body);
+                  const appResponse = response.response.app[0];
+
+                  if (appResponse.updatecheck.status === "ok") {
+                    const updatecheck = appResponse.updatecheck;
+                    const version = updatecheck.manifest.version;
+                    const url = updatecheck.urls.url.find(u =>
+                      u.codebase.startsWith("https://dl.google.com")
+                    ) || updatecheck.urls.url[0];
+                    const pkg = updatecheck.manifest.packages.package[0];
+
+                    results.push({
+                      name: flavor.name,
+                      tag: flavor.tag,
+                      appid: app.guid,
+                      version: version,
+                      cohortname: appResponse.cohortname || "N/A",
+                      arguments: updatecheck.manifest.arguments || "",
+                      download: url.codebase + pkg.name,
+                      size: parseInt(pkg.size),
+                      sha256: pkg.hash_sha256
+                    });
+                  }
+                } catch (error) {
+                  console.error(`Error fetching ${flavor.name}:`, error.message);
                 }
-              } catch (error) {
-                console.error(`Error fetching ${app.name}:`, error.message);
               }
             }
             
@@ -305,7 +341,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data.json
-          git commit -m "Update stable versions data - $(date +'%Y-%m-%d')"
+          git commit -m "🤖 Automatic data update at $(date +'%Y-%m-%d')"
           git push
           
       # Disabled: Auto create release

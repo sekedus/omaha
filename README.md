@@ -20,10 +20,11 @@ This project is a fork of [chsbuffer/omaha2tg](https://github.com/chsbuffer/omah
 
 ## Products Tracked
 
-- Google Chrome (Stable, Beta, Dev, Canary)
+- Google Chrome
 - Google Play Games Beta
+- Google Play Games Developer Emulator
 - Quick Share (formerly Nearby Share)
-- Google Play Games Developer Emulator (Stable, Beta)
+- Google Earth Pro
 
 ## Prerequisites
 
@@ -118,13 +119,15 @@ If you want to enable mock mode on Vercel (for testing):
 2. Add environment variable: `MOCK_MODE=true`
 3. Redeploy the application
 
-## File Structure
+<!-- ## File Structure
 
 ```
 omaha/
 ├── api/
 │   └── update.js              # Vercel serverless function (uses server.js)
 ├── assets/
+│   ├── css
+│   │   └── styles.css
 │   ├── img
 │   │   ├── o.png
 │   │   └── omaha.png
@@ -137,7 +140,7 @@ omaha/
 ├── vercel.json                # Vercel deployment configuration
 ├── package.json
 └── README.md
-```
+``` -->
 
 ## Development
 
@@ -163,6 +166,14 @@ The application includes several security measures:
 - **Omaha Protocol**: Google's update protocol for Chrome and other products
   - [Chromium Omaha Protocol Documentation](https://source.chromium.org/chromium/chromium/src/+/main:docs/updater/protocol_3_1.md)
   - [Google Omaha Protocol V3](https://github.com/google/omaha/blob/main/doc/ServerProtocolV3.md)
+
+## Related
+
+- https://github.com/bubbles-wow/GPG-update-checker
+- https://github.com/Bush2021/chrome_installer
+- https://github.com/ulixee/chrome-versions
+- https://github.com/libsgh/chrome_updater
+- https://qiita.com/kokosan60/items/8a72eee1c6643044a5cc
 
 ## License
 
