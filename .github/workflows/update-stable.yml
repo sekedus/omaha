@@ -156,10 +156,8 @@ jobs:
                   results.push({
                     name: app.name,
                     tag: app.tag,
-                    version: version,
                     appid: app.guid,
-                    // cohortname: appResponse.cohortname || "Stable",
-                    // arguments: updatecheck.manifest.arguments || "",
+                    version: version,
                     download: url.codebase + pkg.name,
                     size: parseInt(pkg.size),
                     sha256: pkg.hash_sha256
@@ -173,18 +171,108 @@ jobs:
             return results;
           }
 
+          function compareVersions(v1, v2) {
+            const parts1 = v1.split('.').map(Number);
+            const parts2 = v2.split('.').map(Number);
+            
+            for (let i = 0; i < Math.max(parts1.length, parts2.length); i++) {
+              const p1 = parts1[i] || 0;
+              const p2 = parts2[i] || 0;
+              if (p1 > p2) return -1; // v1 is newer
+              if (p1 < p2) return 1;  // v2 is newer
+            }
+            return 0; // equal
+          }
+
           fetchStableVersions().then(results => {
-            fs.writeFileSync('data.json', JSON.stringify(results, null, 2));
+            // Load existing data.json if it exists
+            let existingData = [];
+            if (fs.existsSync('data.json')) {
+              try {
+                existingData = JSON.parse(fs.readFileSync('data.json', 'utf8'));
+              } catch (error) {
+                console.log('Could not parse existing data.json, starting fresh');
+              }
+            }
+
+            // Convert existing data to new format if needed
+            const productMap = new Map();
+            
+            // Process existing data
+            existingData.forEach(item => {
+              const key = `${item.tag}_${item.appid}`;
+              if (!productMap.has(key)) {
+                productMap.set(key, {
+                  name: item.name,
+                  tag: item.tag,
+                  appid: item.appid,
+                  versions: {}
+                });
+              }
+              const product = productMap.get(key);
+              
+              // Handle both old and new format
+              if (item.versions) {
+                // New format: merge all versions
+                Object.assign(product.versions, item.versions);
+              } else if (item.version) {
+                // Old format: add single version
+                product.versions[item.version] = {
+                  download: item.download,
+                  size: item.size,
+                  sha256: item.sha256
+                };
+              }
+            });
+
+            // Add new results
+            results.forEach(item => {
+              const key = `${item.tag}_${item.appid}`;
+              if (!productMap.has(key)) {
+                productMap.set(key, {
+                  name: item.name,
+                  tag: item.tag,
+                  appid: item.appid,
+                  versions: {}
+                });
+              }
+              const product = productMap.get(key);
+              product.versions[item.version] = {
+                download: item.download,
+                size: item.size,
+                sha256: item.sha256
+              };
+            });
+
+            // Convert map to array and sort versions (newest first)
+            const output = Array.from(productMap.values()).map(product => {
+              // Sort versions in descending order (newest first)
+              const sortedVersions = {};
+              Object.keys(product.versions)
+                .sort(compareVersions)
+                .forEach(version => {
+                  sortedVersions[version] = product.versions[version];
+                });
+              
+              return {
+                name: product.name,
+                tag: product.tag,
+                appid: product.appid,
+                versions: sortedVersions
+              };
+            });
+
+            fs.writeFileSync('data.json', JSON.stringify(output, null, 2));
             console.log('Data saved to data.json');
             
             // Output for GitHub Actions
-            const output = process.env.GITHUB_OUTPUT;
-            if (output) {
+            const ghOutput = process.env.GITHUB_OUTPUT;
+            if (ghOutput) {
               if (results.length > 0) {
-                fs.appendFileSync(output, `has_updates=true\n`);
-                fs.appendFileSync(output, `version=${results[0].version}\n`);
+                fs.appendFileSync(ghOutput, `has_updates=true\n`);
+                fs.appendFileSync(ghOutput, `version=${results[0].version}\n`);
               } else {
-                fs.appendFileSync(output, `has_updates=false\n`);
+                fs.appendFileSync(ghOutput, `has_updates=false\n`);
               }
             }
           }).catch(error => {
