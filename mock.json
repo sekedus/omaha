@@ -2,57 +2,62 @@
   {
     "response": {
       "server": "prod",
-      "protocol": "3.1",
+      "protocol": "4.0",
       "daystart": {
-        "elapsed_seconds": 53947,
+        "elapsed_seconds": 56946,
         "elapsed_days": 6892
       },
-      "app": [
+      "apps": [
         {
           "appid": "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
           "cohort": "1:gu/i19:",
           "status": "ok",
           "cohortname": "Stable Installs & Version Pins",
           "updatecheck": {
+            "nextversion": "142.0.7444.163",
             "status": "ok",
-            "urls": {
-              "url": [
-                {
-                  "codebase": "http://edgedl.me.gvt1.com/edgedl/release2/chrome/ac4a7eovqzrlhvzvyz3jmxlutima_142.0.7444.163/"
-                },
-                {
-                  "codebase": "https://edgedl.me.gvt1.com/edgedl/release2/chrome/ac4a7eovqzrlhvzvyz3jmxlutima_142.0.7444.163/"
-                },
-                {
-                  "codebase": "http://dl.google.com/release2/chrome/ac4a7eovqzrlhvzvyz3jmxlutima_142.0.7444.163/"
-                },
-                {
-                  "codebase": "https://dl.google.com/release2/chrome/ac4a7eovqzrlhvzvyz3jmxlutima_142.0.7444.163/"
-                },
-                {
-                  "codebase": "http://www.google.com/dl/release2/chrome/ac4a7eovqzrlhvzvyz3jmxlutima_142.0.7444.163/"
-                },
-                {
-                  "codebase": "https://www.google.com/dl/release2/chrome/ac4a7eovqzrlhvzvyz3jmxlutima_142.0.7444.163/"
-                }
-              ]
-            },
-            "manifest": {
-              "arguments": "--verbose-logging --do-not-launch-chrome --channel=stable",
-              "version": "142.0.7444.163",
-              "packages": {
-                "package": [
+            "pipelines": [
+              {
+                "pipeline_id": "1:full:bfd2d9d9fa1a47f2619861a359936eb86818b48f94fef33f4bdd05bb099e1f09:any",
+                "operations": [
                   {
-                    "hash_sha256": "3d8467b5002debab1c511adcd18f2e9e2e572aad1da303bbb9550aeca2ac51f3",
-                    "size": 365129640,
-                    "name": "142.0.7444.163_chrome_installer_uncompressed.exe",
-                    "fp": "1.3d8467b5002debab1c511adcd18f2e9e2e572aad1da303bbb9550aeca2ac51f3",
-                    "required": true,
-                    "hash": "8oWm8G0TlZEqzKi9oUJ9ET4I0ZU="
+                    "size": 365133089,
+                    "type": "download",
+                    "out": {
+                      "sha256": "bfd2d9d9fa1a47f2619861a359936eb86818b48f94fef33f4bdd05bb099e1f09"
+                    },
+                    "urls": [
+                      {
+                        "url": "http://edgedl.me.gvt1.com/edgedl/release2/chrome/ac6qk5pyt2wgvd334qglkn7dsgoa_142.0.7444.163/-8a69d345-d564-463c-aff1-a69d9e530f96-_142.0.7444.163_all_eqfj5r4ybmo33llgmsxvhykgyu.crx3"
+                      },
+                      {
+                        "url": "https://edgedl.me.gvt1.com/edgedl/release2/chrome/ac6qk5pyt2wgvd334qglkn7dsgoa_142.0.7444.163/-8a69d345-d564-463c-aff1-a69d9e530f96-_142.0.7444.163_all_eqfj5r4ybmo33llgmsxvhykgyu.crx3"
+                      },
+                      {
+                        "url": "http://dl.google.com/release2/chrome/ac6qk5pyt2wgvd334qglkn7dsgoa_142.0.7444.163/-8a69d345-d564-463c-aff1-a69d9e530f96-_142.0.7444.163_all_eqfj5r4ybmo33llgmsxvhykgyu.crx3"
+                      },
+                      {
+                        "url": "https://dl.google.com/release2/chrome/ac6qk5pyt2wgvd334qglkn7dsgoa_142.0.7444.163/-8a69d345-d564-463c-aff1-a69d9e530f96-_142.0.7444.163_all_eqfj5r4ybmo33llgmsxvhykgyu.crx3"
+                      },
+                      {
+                        "url": "http://www.google.com/dl/release2/chrome/ac6qk5pyt2wgvd334qglkn7dsgoa_142.0.7444.163/-8a69d345-d564-463c-aff1-a69d9e530f96-_142.0.7444.163_all_eqfj5r4ybmo33llgmsxvhykgyu.crx3"
+                      },
+                      {
+                        "url": "https://www.google.com/dl/release2/chrome/ac6qk5pyt2wgvd334qglkn7dsgoa_142.0.7444.163/-8a69d345-d564-463c-aff1-a69d9e530f96-_142.0.7444.163_all_eqfj5r4ybmo33llgmsxvhykgyu.crx3"
+                      }
+                    ]
+                  },
+                  {
+                    "path": "142.0.7444.163_chrome_installer_uncompressed.exe",
+                    "arguments": "--verbose-logging --do-not-launch-chrome --channel=stable",
+                    "type": "crx3",
+                    "in": {
+                      "sha256": "bfd2d9d9fa1a47f2619861a359936eb86818b48f94fef33f4bdd05bb099e1f09"
+                    }
                   }
                 ]
               }
-            }
+            ]
           }
         },
         {
@@ -61,45 +66,50 @@
           "status": "ok",
           "cohortname": "External installs",
           "updatecheck": {
+            "nextversion": "7.3.6.10441",
             "status": "ok",
-            "urls": {
-              "url": [
-                {
-                  "codebase": "http://edgedl.me.gvt1.com/edgedl/release2/Earth/g6s6n6z7ltn2tqto53taohklt4_7.3.6.10441/"
-                },
-                {
-                  "codebase": "https://edgedl.me.gvt1.com/edgedl/release2/Earth/g6s6n6z7ltn2tqto53taohklt4_7.3.6.10441/"
-                },
-                {
-                  "codebase": "http://dl.google.com/release2/Earth/g6s6n6z7ltn2tqto53taohklt4_7.3.6.10441/"
-                },
-                {
-                  "codebase": "https://dl.google.com/release2/Earth/g6s6n6z7ltn2tqto53taohklt4_7.3.6.10441/"
-                },
-                {
-                  "codebase": "http://www.google.com/dl/release2/Earth/g6s6n6z7ltn2tqto53taohklt4_7.3.6.10441/"
-                },
-                {
-                  "codebase": "https://www.google.com/dl/release2/Earth/g6s6n6z7ltn2tqto53taohklt4_7.3.6.10441/"
-                }
-              ]
-            },
-            "manifest": {
-              "arguments": "REBOOT=ReallySuppress OMAHA=1 ALLUSERS=1 REINSTALLMODE=emus",
-              "version": "7.3.6.10441",
-              "packages": {
-                "package": [
+            "pipelines": [
+              {
+                "pipeline_id": "1:full:20ad26a17da6ebe4b6c3fa62edf57a8968c7536d4ee824e076c71f872d728811:any",
+                "operations": [
                   {
-                    "hash_sha256": "50be0c04b12a577bb449d44388ed98310a47e5be852a9e7a43219dab32d220f7",
-                    "size": 61836440,
-                    "name": "googleearth-win-pro-7.3.6.10441-x86.exe",
-                    "fp": "1.50be0c04b12a577bb449d44388ed98310a47e5be852a9e7a43219dab32d220f7",
-                    "required": true,
-                    "hash": "Vd33jrl8sUZzMDfSslOTbuC9G0k="
+                    "size": 59127963,
+                    "type": "download",
+                    "out": {
+                      "sha256": "20ad26a17da6ebe4b6c3fa62edf57a8968c7536d4ee824e076c71f872d728811"
+                    },
+                    "urls": [
+                      {
+                        "url": "http://edgedl.me.gvt1.com/edgedl/release2/Earth/bu4nvo5ych45y7il3ujm26kadm_7.3.6.10441/-65e60e95-0de9-43ff-9f3f-4f7d2dff04b5-_7.3.6.10441_all_niv6m7swi4n4eyhlbb6uevxkeu.crx3"
+                      },
+                      {
+                        "url": "https://edgedl.me.gvt1.com/edgedl/release2/Earth/bu4nvo5ych45y7il3ujm26kadm_7.3.6.10441/-65e60e95-0de9-43ff-9f3f-4f7d2dff04b5-_7.3.6.10441_all_niv6m7swi4n4eyhlbb6uevxkeu.crx3"
+                      },
+                      {
+                        "url": "http://dl.google.com/release2/Earth/bu4nvo5ych45y7il3ujm26kadm_7.3.6.10441/-65e60e95-0de9-43ff-9f3f-4f7d2dff04b5-_7.3.6.10441_all_niv6m7swi4n4eyhlbb6uevxkeu.crx3"
+                      },
+                      {
+                        "url": "https://dl.google.com/release2/Earth/bu4nvo5ych45y7il3ujm26kadm_7.3.6.10441/-65e60e95-0de9-43ff-9f3f-4f7d2dff04b5-_7.3.6.10441_all_niv6m7swi4n4eyhlbb6uevxkeu.crx3"
+                      },
+                      {
+                        "url": "http://www.google.com/dl/release2/Earth/bu4nvo5ych45y7il3ujm26kadm_7.3.6.10441/-65e60e95-0de9-43ff-9f3f-4f7d2dff04b5-_7.3.6.10441_all_niv6m7swi4n4eyhlbb6uevxkeu.crx3"
+                      },
+                      {
+                        "url": "https://www.google.com/dl/release2/Earth/bu4nvo5ych45y7il3ujm26kadm_7.3.6.10441/-65e60e95-0de9-43ff-9f3f-4f7d2dff04b5-_7.3.6.10441_all_niv6m7swi4n4eyhlbb6uevxkeu.crx3"
+                      }
+                    ]
+                  },
+                  {
+                    "path": "googleearth-win-pro-7.3.6.10441-x86.exe",
+                    "arguments": "REBOOT=ReallySuppress OMAHA=1 ALLUSERS=1 REINSTALLMODE=emus",
+                    "type": "crx3",
+                    "in": {
+                      "sha256": "20ad26a17da6ebe4b6c3fa62edf57a8968c7536d4ee824e076c71f872d728811"
+                    }
                   }
                 ]
               }
-            }
+            ]
           }
         }
       ]
@@ -108,57 +118,62 @@
   {
     "response": {
       "server": "prod",
-      "protocol": "3.1",
+      "protocol": "4.0",
       "daystart": {
-        "elapsed_seconds": 53948,
+        "elapsed_seconds": 56947,
         "elapsed_days": 6892
       },
-      "app": [
+      "apps": [
         {
           "appid": "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
           "cohort": "1:gu/i19:",
           "status": "ok",
           "cohortname": "Stable Installs & Version Pins",
           "updatecheck": {
+            "nextversion": "142.0.7444.163",
             "status": "ok",
-            "urls": {
-              "url": [
-                {
-                  "codebase": "http://edgedl.me.gvt1.com/edgedl/release2/chrome/afnv7ciko6xz6qfe4xmdhvnz34_142.0.7444.163/"
-                },
-                {
-                  "codebase": "https://edgedl.me.gvt1.com/edgedl/release2/chrome/afnv7ciko6xz6qfe4xmdhvnz34_142.0.7444.163/"
-                },
-                {
-                  "codebase": "http://dl.google.com/release2/chrome/afnv7ciko6xz6qfe4xmdhvnz34_142.0.7444.163/"
-                },
-                {
-                  "codebase": "https://dl.google.com/release2/chrome/afnv7ciko6xz6qfe4xmdhvnz34_142.0.7444.163/"
-                },
-                {
-                  "codebase": "http://www.google.com/dl/release2/chrome/afnv7ciko6xz6qfe4xmdhvnz34_142.0.7444.163/"
-                },
-                {
-                  "codebase": "https://www.google.com/dl/release2/chrome/afnv7ciko6xz6qfe4xmdhvnz34_142.0.7444.163/"
-                }
-              ]
-            },
-            "manifest": {
-              "arguments": "--verbose-logging --do-not-launch-chrome --channel=stable",
-              "version": "142.0.7444.163",
-              "packages": {
-                "package": [
+            "pipelines": [
+              {
+                "pipeline_id": "1:full:67f7d301e7ea0afd0f096e419a50161a257bb53e45ef27d4d5d71a0134fa435f:any",
+                "operations": [
                   {
-                    "hash_sha256": "492169239ebb3d991ee1a2df24660607bcdef0f89e01f579730d39769490b5a6",
-                    "size": 441233320,
-                    "name": "142.0.7444.163_chrome_installer_uncompressed.exe",
-                    "fp": "1.492169239ebb3d991ee1a2df24660607bcdef0f89e01f579730d39769490b5a6",
-                    "required": true,
-                    "hash": "r5JrmN2AWGECQ1WLt0K6bjEoLPw="
+                    "size": 441236769,
+                    "type": "download",
+                    "out": {
+                      "sha256": "67f7d301e7ea0afd0f096e419a50161a257bb53e45ef27d4d5d71a0134fa435f"
+                    },
+                    "urls": [
+                      {
+                        "url": "http://edgedl.me.gvt1.com/edgedl/release2/chrome/nfee5i5vrdhtxkpk36ubyvv3vy_142.0.7444.163/-8a69d345-d564-463c-aff1-a69d9e530f96-_142.0.7444.163_all_ob32tnsimna2gbx4yfvwfocimm.crx3"
+                      },
+                      {
+                        "url": "https://edgedl.me.gvt1.com/edgedl/release2/chrome/nfee5i5vrdhtxkpk36ubyvv3vy_142.0.7444.163/-8a69d345-d564-463c-aff1-a69d9e530f96-_142.0.7444.163_all_ob32tnsimna2gbx4yfvwfocimm.crx3"
+                      },
+                      {
+                        "url": "http://dl.google.com/release2/chrome/nfee5i5vrdhtxkpk36ubyvv3vy_142.0.7444.163/-8a69d345-d564-463c-aff1-a69d9e530f96-_142.0.7444.163_all_ob32tnsimna2gbx4yfvwfocimm.crx3"
+                      },
+                      {
+                        "url": "https://dl.google.com/release2/chrome/nfee5i5vrdhtxkpk36ubyvv3vy_142.0.7444.163/-8a69d345-d564-463c-aff1-a69d9e530f96-_142.0.7444.163_all_ob32tnsimna2gbx4yfvwfocimm.crx3"
+                      },
+                      {
+                        "url": "http://www.google.com/dl/release2/chrome/nfee5i5vrdhtxkpk36ubyvv3vy_142.0.7444.163/-8a69d345-d564-463c-aff1-a69d9e530f96-_142.0.7444.163_all_ob32tnsimna2gbx4yfvwfocimm.crx3"
+                      },
+                      {
+                        "url": "https://www.google.com/dl/release2/chrome/nfee5i5vrdhtxkpk36ubyvv3vy_142.0.7444.163/-8a69d345-d564-463c-aff1-a69d9e530f96-_142.0.7444.163_all_ob32tnsimna2gbx4yfvwfocimm.crx3"
+                      }
+                    ]
+                  },
+                  {
+                    "path": "142.0.7444.163_chrome_installer_uncompressed.exe",
+                    "arguments": "--verbose-logging --do-not-launch-chrome --channel=stable",
+                    "type": "crx3",
+                    "in": {
+                      "sha256": "67f7d301e7ea0afd0f096e419a50161a257bb53e45ef27d4d5d71a0134fa435f"
+                    }
                   }
                 ]
               }
-            }
+            ]
           }
         },
         {
@@ -167,45 +182,50 @@
           "status": "ok",
           "cohortname": "Public_Beta",
           "updatecheck": {
+            "nextversion": "25.11.113.6",
             "status": "ok",
-            "urls": {
-              "url": [
-                {
-                  "codebase": "http://edgedl.me.gvt1.com/edgedl/release2/Play/ad7tiras6o24ztw6qwk7azkamroq_25.11.113.6/"
-                },
-                {
-                  "codebase": "https://edgedl.me.gvt1.com/edgedl/release2/Play/ad7tiras6o24ztw6qwk7azkamroq_25.11.113.6/"
-                },
-                {
-                  "codebase": "http://dl.google.com/release2/Play/ad7tiras6o24ztw6qwk7azkamroq_25.11.113.6/"
-                },
-                {
-                  "codebase": "https://dl.google.com/release2/Play/ad7tiras6o24ztw6qwk7azkamroq_25.11.113.6/"
-                },
-                {
-                  "codebase": "http://www.google.com/dl/release2/Play/ad7tiras6o24ztw6qwk7azkamroq_25.11.113.6/"
-                },
-                {
-                  "codebase": "https://www.google.com/dl/release2/Play/ad7tiras6o24ztw6qwk7azkamroq_25.11.113.6/"
-                }
-              ]
-            },
-            "manifest": {
-              "arguments": "/o{47B07D71-505D-4665-AFD4-4972A30C6530} /l1518 /noui",
-              "version": "25.11.113.6",
-              "packages": {
-                "package": [
+            "pipelines": [
+              {
+                "pipeline_id": "1:full:e7f85e4f2cee1144303925f02ae02c8a5f1d5c0b45700e395fe51b7c497a8267:any",
+                "operations": [
                   {
-                    "hash_sha256": "75b51368add2a3ae876b73148f7567a5839d2ad5e00045063ee5a8deee393491",
-                    "size": 882828800,
-                    "name": "HPE-25.11.113.6-CIP.exe",
-                    "fp": "1.75b51368add2a3ae876b73148f7567a5839d2ad5e00045063ee5a8deee393491",
-                    "required": true,
-                    "hash": "EAY6P/TfgFNzZWMaHqyqUk1S7b8="
+                    "size": 882132826,
+                    "type": "download",
+                    "out": {
+                      "sha256": "e7f85e4f2cee1144303925f02ae02c8a5f1d5c0b45700e395fe51b7c497a8267"
+                    },
+                    "urls": [
+                      {
+                        "url": "http://edgedl.me.gvt1.com/edgedl/release2/Play/ajjpio6n6uzhzrs34ximu5dicm_25.11.113.6/-47b07d71-505d-4665-afd4-4972a30c6530-_25.11.113.6_all_cw4kvv3s54aultyfhbu6ph5iya.crx3"
+                      },
+                      {
+                        "url": "https://edgedl.me.gvt1.com/edgedl/release2/Play/ajjpio6n6uzhzrs34ximu5dicm_25.11.113.6/-47b07d71-505d-4665-afd4-4972a30c6530-_25.11.113.6_all_cw4kvv3s54aultyfhbu6ph5iya.crx3"
+                      },
+                      {
+                        "url": "http://dl.google.com/release2/Play/ajjpio6n6uzhzrs34ximu5dicm_25.11.113.6/-47b07d71-505d-4665-afd4-4972a30c6530-_25.11.113.6_all_cw4kvv3s54aultyfhbu6ph5iya.crx3"
+                      },
+                      {
+                        "url": "https://dl.google.com/release2/Play/ajjpio6n6uzhzrs34ximu5dicm_25.11.113.6/-47b07d71-505d-4665-afd4-4972a30c6530-_25.11.113.6_all_cw4kvv3s54aultyfhbu6ph5iya.crx3"
+                      },
+                      {
+                        "url": "http://www.google.com/dl/release2/Play/ajjpio6n6uzhzrs34ximu5dicm_25.11.113.6/-47b07d71-505d-4665-afd4-4972a30c6530-_25.11.113.6_all_cw4kvv3s54aultyfhbu6ph5iya.crx3"
+                      },
+                      {
+                        "url": "https://www.google.com/dl/release2/Play/ajjpio6n6uzhzrs34ximu5dicm_25.11.113.6/-47b07d71-505d-4665-afd4-4972a30c6530-_25.11.113.6_all_cw4kvv3s54aultyfhbu6ph5iya.crx3"
+                      }
+                    ]
+                  },
+                  {
+                    "path": "HPE-25.11.113.6-CIP.exe",
+                    "arguments": "/o{47B07D71-505D-4665-AFD4-4972A30C6530} /l1518 /noui",
+                    "type": "crx3",
+                    "in": {
+                      "sha256": "e7f85e4f2cee1144303925f02ae02c8a5f1d5c0b45700e395fe51b7c497a8267"
+                    }
                   }
                 ]
               }
-            }
+            ]
           }
         },
         {
@@ -214,91 +234,101 @@
           "status": "ok",
           "cohortname": "Prod",
           "updatecheck": {
+            "nextversion": "25.11.113.4",
             "status": "ok",
-            "urls": {
-              "url": [
-                {
-                  "codebase": "http://edgedl.me.gvt1.com/edgedl/release2/Play/c73njk62cwje4xn3fbbksiinyq_25.11.113.4/"
-                },
-                {
-                  "codebase": "https://edgedl.me.gvt1.com/edgedl/release2/Play/c73njk62cwje4xn3fbbksiinyq_25.11.113.4/"
-                },
-                {
-                  "codebase": "http://dl.google.com/release2/Play/c73njk62cwje4xn3fbbksiinyq_25.11.113.4/"
-                },
-                {
-                  "codebase": "https://dl.google.com/release2/Play/c73njk62cwje4xn3fbbksiinyq_25.11.113.4/"
-                },
-                {
-                  "codebase": "http://www.google.com/dl/release2/Play/c73njk62cwje4xn3fbbksiinyq_25.11.113.4/"
-                },
-                {
-                  "codebase": "https://www.google.com/dl/release2/Play/c73njk62cwje4xn3fbbksiinyq_25.11.113.4/"
-                }
-              ]
-            },
-            "manifest": {
-              "arguments": "/o{C601E9A4-03B0-4188-843E-80058BF16EF9} /l1518 /noui",
-              "version": "25.11.113.4",
-              "packages": {
-                "package": [
+            "pipelines": [
+              {
+                "pipeline_id": "1:full:ca32520608009a82b6828b20ba47576c7af4b0a575d44cd24be1a003defc3f44:any",
+                "operations": [
                   {
-                    "hash_sha256": "a0d481597ad8d61a5b2b6c2b369a03607a4538fbdda93071fea822b5986c2fea",
-                    "size": 802290936,
-                    "name": "HPE-25.11.113.4-CIP_3pdev_prod.exe",
-                    "fp": "1.a0d481597ad8d61a5b2b6c2b369a03607a4538fbdda93071fea822b5986c2fea",
-                    "required": true,
-                    "hash": "Pm6nCwFnG3TupviMdI0HeYW57D8="
+                    "size": 801586863,
+                    "type": "download",
+                    "out": {
+                      "sha256": "ca32520608009a82b6828b20ba47576c7af4b0a575d44cd24be1a003defc3f44"
+                    },
+                    "urls": [
+                      {
+                        "url": "http://edgedl.me.gvt1.com/edgedl/release2/Play/adgw5dogqutr6nccnr4fwx6oqnqq_25.11.113.4/-c601e9a4-03b0-4188-843e-80058bf16ef9-_25.11.113.4_all_adc4ob5mz3vjm2dgvtf5k45zvqfa.crx3"
+                      },
+                      {
+                        "url": "https://edgedl.me.gvt1.com/edgedl/release2/Play/adgw5dogqutr6nccnr4fwx6oqnqq_25.11.113.4/-c601e9a4-03b0-4188-843e-80058bf16ef9-_25.11.113.4_all_adc4ob5mz3vjm2dgvtf5k45zvqfa.crx3"
+                      },
+                      {
+                        "url": "http://dl.google.com/release2/Play/adgw5dogqutr6nccnr4fwx6oqnqq_25.11.113.4/-c601e9a4-03b0-4188-843e-80058bf16ef9-_25.11.113.4_all_adc4ob5mz3vjm2dgvtf5k45zvqfa.crx3"
+                      },
+                      {
+                        "url": "https://dl.google.com/release2/Play/adgw5dogqutr6nccnr4fwx6oqnqq_25.11.113.4/-c601e9a4-03b0-4188-843e-80058bf16ef9-_25.11.113.4_all_adc4ob5mz3vjm2dgvtf5k45zvqfa.crx3"
+                      },
+                      {
+                        "url": "http://www.google.com/dl/release2/Play/adgw5dogqutr6nccnr4fwx6oqnqq_25.11.113.4/-c601e9a4-03b0-4188-843e-80058bf16ef9-_25.11.113.4_all_adc4ob5mz3vjm2dgvtf5k45zvqfa.crx3"
+                      },
+                      {
+                        "url": "https://www.google.com/dl/release2/Play/adgw5dogqutr6nccnr4fwx6oqnqq_25.11.113.4/-c601e9a4-03b0-4188-843e-80058bf16ef9-_25.11.113.4_all_adc4ob5mz3vjm2dgvtf5k45zvqfa.crx3"
+                      }
+                    ]
+                  },
+                  {
+                    "path": "HPE-25.11.113.4-CIP_3pdev_prod.exe",
+                    "arguments": "/o{C601E9A4-03B0-4188-843E-80058BF16EF9} /l1518 /noui",
+                    "type": "crx3",
+                    "in": {
+                      "sha256": "ca32520608009a82b6828b20ba47576c7af4b0a575d44cd24be1a003defc3f44"
+                    }
                   }
                 ]
               }
-            }
+            ]
           }
         },
         {
           "appid": "{232066FE-FF4D-4C25-83B4-3F8747CF7E3A}",
-          "cohort": "1:135x/2qo9/2qof:2qol@0.2",
+          "cohort": "1:135x:2qo9@0.5",
           "status": "ok",
-          "cohortname": "Everyone 10%",
+          "cohortname": "Everyone",
           "updatecheck": {
+            "nextversion": "1.0.2399.1",
             "status": "ok",
-            "urls": {
-              "url": [
-                {
-                  "codebase": "http://edgedl.me.gvt1.com/edgedl/release2/Nearby/acxp4o2gkafyjglomcjnbw3hnfxq_1.0.2399.1/"
-                },
-                {
-                  "codebase": "https://edgedl.me.gvt1.com/edgedl/release2/Nearby/acxp4o2gkafyjglomcjnbw3hnfxq_1.0.2399.1/"
-                },
-                {
-                  "codebase": "http://dl.google.com/release2/Nearby/acxp4o2gkafyjglomcjnbw3hnfxq_1.0.2399.1/"
-                },
-                {
-                  "codebase": "https://dl.google.com/release2/Nearby/acxp4o2gkafyjglomcjnbw3hnfxq_1.0.2399.1/"
-                },
-                {
-                  "codebase": "http://www.google.com/dl/release2/Nearby/acxp4o2gkafyjglomcjnbw3hnfxq_1.0.2399.1/"
-                },
-                {
-                  "codebase": "https://www.google.com/dl/release2/Nearby/acxp4o2gkafyjglomcjnbw3hnfxq_1.0.2399.1/"
-                }
-              ]
-            },
-            "manifest": {
-              "version": "1.0.2399.1",
-              "packages": {
-                "package": [
+            "pipelines": [
+              {
+                "pipeline_id": "1:full:deaad7f5fcd832d6d88f8f326fc29c6c334a1501ebc819730b4d143217c515c7:any",
+                "operations": [
                   {
-                    "hash_sha256": "f1db6539b9f213d193602b9387dbe394fd7247c7e1acae30ba208c5f84f453f2",
-                    "size": 97030144,
-                    "name": "better_together.msi",
-                    "fp": "1.f1db6539b9f213d193602b9387dbe394fd7247c7e1acae30ba208c5f84f453f2",
-                    "required": true,
-                    "hash": "fE45z+mioa3df1woqKq4EWP5+RI="
+                    "size": 97033457,
+                    "type": "download",
+                    "out": {
+                      "sha256": "deaad7f5fcd832d6d88f8f326fc29c6c334a1501ebc819730b4d143217c515c7"
+                    },
+                    "urls": [
+                      {
+                        "url": "http://edgedl.me.gvt1.com/edgedl/release2/Nearby/nnvdsqlke47n2gxzbfcj42t3ua_1.0.2399.1/-232066fe-ff4d-4c25-83b4-3f8747cf7e3a-_1.0.2399.1_all_ikf4nqm745tlpfayujlti5efaa.crx3"
+                      },
+                      {
+                        "url": "https://edgedl.me.gvt1.com/edgedl/release2/Nearby/nnvdsqlke47n2gxzbfcj42t3ua_1.0.2399.1/-232066fe-ff4d-4c25-83b4-3f8747cf7e3a-_1.0.2399.1_all_ikf4nqm745tlpfayujlti5efaa.crx3"
+                      },
+                      {
+                        "url": "http://dl.google.com/release2/Nearby/nnvdsqlke47n2gxzbfcj42t3ua_1.0.2399.1/-232066fe-ff4d-4c25-83b4-3f8747cf7e3a-_1.0.2399.1_all_ikf4nqm745tlpfayujlti5efaa.crx3"
+                      },
+                      {
+                        "url": "https://dl.google.com/release2/Nearby/nnvdsqlke47n2gxzbfcj42t3ua_1.0.2399.1/-232066fe-ff4d-4c25-83b4-3f8747cf7e3a-_1.0.2399.1_all_ikf4nqm745tlpfayujlti5efaa.crx3"
+                      },
+                      {
+                        "url": "http://www.google.com/dl/release2/Nearby/nnvdsqlke47n2gxzbfcj42t3ua_1.0.2399.1/-232066fe-ff4d-4c25-83b4-3f8747cf7e3a-_1.0.2399.1_all_ikf4nqm745tlpfayujlti5efaa.crx3"
+                      },
+                      {
+                        "url": "https://www.google.com/dl/release2/Nearby/nnvdsqlke47n2gxzbfcj42t3ua_1.0.2399.1/-232066fe-ff4d-4c25-83b4-3f8747cf7e3a-_1.0.2399.1_all_ikf4nqm745tlpfayujlti5efaa.crx3"
+                      }
+                    ]
+                  },
+                  {
+                    "path": "better_together.msi",
+                    "type": "crx3",
+                    "in": {
+                      "sha256": "deaad7f5fcd832d6d88f8f326fc29c6c334a1501ebc819730b4d143217c515c7"
+                    }
                   }
                 ]
               }
-            }
+            ]
           }
         },
         {
@@ -307,45 +337,50 @@
           "status": "ok",
           "cohortname": "External installs",
           "updatecheck": {
+            "nextversion": "7.3.6.10441",
             "status": "ok",
-            "urls": {
-              "url": [
-                {
-                  "codebase": "http://edgedl.me.gvt1.com/edgedl/release2/Earth/adym7ssbzqvv5qny2wfe56h6ib6a_7.3.6.10441/"
-                },
-                {
-                  "codebase": "https://edgedl.me.gvt1.com/edgedl/release2/Earth/adym7ssbzqvv5qny2wfe56h6ib6a_7.3.6.10441/"
-                },
-                {
-                  "codebase": "http://dl.google.com/release2/Earth/adym7ssbzqvv5qny2wfe56h6ib6a_7.3.6.10441/"
-                },
-                {
-                  "codebase": "https://dl.google.com/release2/Earth/adym7ssbzqvv5qny2wfe56h6ib6a_7.3.6.10441/"
-                },
-                {
-                  "codebase": "http://www.google.com/dl/release2/Earth/adym7ssbzqvv5qny2wfe56h6ib6a_7.3.6.10441/"
-                },
-                {
-                  "codebase": "https://www.google.com/dl/release2/Earth/adym7ssbzqvv5qny2wfe56h6ib6a_7.3.6.10441/"
-                }
-              ]
-            },
-            "manifest": {
-              "arguments": "REBOOT=ReallySuppress OMAHA=1 ALLUSERS=1 REINSTALLMODE=emus",
-              "version": "7.3.6.10441",
-              "packages": {
-                "package": [
+            "pipelines": [
+              {
+                "pipeline_id": "1:full:be6ee8a9a690b7333134597e90451a0021122ad7474fce1337d5d2adf9e21cab:any",
+                "operations": [
                   {
-                    "hash_sha256": "d8aa6d38d95d92d18601f94b1da092b34f9d275ade630fb972baff8bf1e4ebd8",
-                    "size": 70344344,
-                    "name": "googleearth-win-pro-7.3.6.10441-x64.exe",
-                    "fp": "1.d8aa6d38d95d92d18601f94b1da092b34f9d275ade630fb972baff8bf1e4ebd8",
-                    "required": true,
-                    "hash": "Bskla9D+STO1qXoc2glsh/7KiY4="
+                    "size": 67608668,
+                    "type": "download",
+                    "out": {
+                      "sha256": "be6ee8a9a690b7333134597e90451a0021122ad7474fce1337d5d2adf9e21cab"
+                    },
+                    "urls": [
+                      {
+                        "url": "http://edgedl.me.gvt1.com/edgedl/release2/Earth/acgcqogefdapsc4vojkrz5rieptq_7.3.6.10441/-65e60e95-0de9-43ff-9f3f-4f7d2dff04b5-_7.3.6.10441_all_ggq2vkjziwnprlazrojjjceg6m.crx3"
+                      },
+                      {
+                        "url": "https://edgedl.me.gvt1.com/edgedl/release2/Earth/acgcqogefdapsc4vojkrz5rieptq_7.3.6.10441/-65e60e95-0de9-43ff-9f3f-4f7d2dff04b5-_7.3.6.10441_all_ggq2vkjziwnprlazrojjjceg6m.crx3"
+                      },
+                      {
+                        "url": "http://dl.google.com/release2/Earth/acgcqogefdapsc4vojkrz5rieptq_7.3.6.10441/-65e60e95-0de9-43ff-9f3f-4f7d2dff04b5-_7.3.6.10441_all_ggq2vkjziwnprlazrojjjceg6m.crx3"
+                      },
+                      {
+                        "url": "https://dl.google.com/release2/Earth/acgcqogefdapsc4vojkrz5rieptq_7.3.6.10441/-65e60e95-0de9-43ff-9f3f-4f7d2dff04b5-_7.3.6.10441_all_ggq2vkjziwnprlazrojjjceg6m.crx3"
+                      },
+                      {
+                        "url": "http://www.google.com/dl/release2/Earth/acgcqogefdapsc4vojkrz5rieptq_7.3.6.10441/-65e60e95-0de9-43ff-9f3f-4f7d2dff04b5-_7.3.6.10441_all_ggq2vkjziwnprlazrojjjceg6m.crx3"
+                      },
+                      {
+                        "url": "https://www.google.com/dl/release2/Earth/acgcqogefdapsc4vojkrz5rieptq_7.3.6.10441/-65e60e95-0de9-43ff-9f3f-4f7d2dff04b5-_7.3.6.10441_all_ggq2vkjziwnprlazrojjjceg6m.crx3"
+                      }
+                    ]
+                  },
+                  {
+                    "path": "googleearth-win-pro-7.3.6.10441-x64.exe",
+                    "arguments": "REBOOT=ReallySuppress OMAHA=1 ALLUSERS=1 REINSTALLMODE=emus",
+                    "type": "crx3",
+                    "in": {
+                      "sha256": "be6ee8a9a690b7333134597e90451a0021122ad7474fce1337d5d2adf9e21cab"
+                    }
                   }
                 ]
               }
-            }
+            ]
           }
         }
       ]

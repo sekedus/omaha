@@ -22,7 +22,7 @@ function getMockResponse(requestBody) {
 
         // Parse the request to see which apps were requested
         const parsed = JSON.parse(requestBody);
-        const requestedApps = parsed.request.app || [];
+        const requestedApps = parsed.request.apps || [];
         const requestedAppIds = requestedApps.map(a => a.appid);
 
         // Collect all matching apps from all mock responses, preserving requested order
@@ -31,7 +31,7 @@ function getMockResponse(requestBody) {
 
         for (const appid of requestedAppIds) {
             for (const mockResponse of mockData) {
-                const app = mockResponse.response.app.find(a => a.appid === appid);
+                const app = mockResponse.response.apps.find(a => a.appid === appid);
                 if (app) {
                     foundApps.push(app);
                     break;
@@ -50,7 +50,7 @@ function getMockResponse(requestBody) {
                 server: baseResponse.server,
                 protocol: baseResponse.protocol,
                 daystart: baseResponse.daystart,
-                app: foundApps
+                apps: foundApps
             }
         };
         return ')]}\'\n' + JSON.stringify(response);
@@ -60,7 +60,7 @@ function getMockResponse(requestBody) {
         let requestedAppIds = [];
         try {
             const parsed = JSON.parse(requestBody);
-            requestedAppIds = (parsed.request.app || []).map(a => a.appid);
+            requestedAppIds = (parsed.request.apps || []).map(a => a.appid);
         } catch {
             // If requestBody can't be parsed, fallback to single app
             requestedAppIds = ["{8A69D345-D564-463C-AFF1-A69D9E530F96}"];
@@ -94,7 +94,7 @@ function getMockResponse(requestBody) {
         const fallbackResponse = {
             response: {
                 protocol: "3.1",
-                app: requestedAppIds.map(appid => ({ ...fallbackApp, appid }))
+                apps: requestedAppIds.map(appid => ({ ...fallbackApp, appid }))
             }
         };
         return ')]}\'\n' + JSON.stringify(fallbackResponse);

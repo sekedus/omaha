@@ -13,7 +13,7 @@ const apps = [
                 name: "Google Chrome",
                 arch: "x86",
                 extra: {
-                    ap: "x86-stable-statsdef_1"
+                    ap: "-arch_x86-statsdef_1"
                 }
             },
             {
@@ -21,7 +21,7 @@ const apps = [
                 name: "Google Chrome",
                 arch: "x64",
                 extra: {
-                    ap: "x64-stable-statsdef_1"
+                    ap: "-arch_x64-statsdef_1"
                 }
             }
         ]
@@ -81,11 +81,12 @@ const apps = [
 
 function defaultBody(arch) {
     return {
+        // https://chromium.googlesource.com/chromium/src.git/+/refs/heads/main/docs/updater/protocol_4.md
         request: {
             "@os": "win",
             "@updater": "updater",
-            "acceptformat": "exe",
-            "app": [],
+            "acceptformat": "crx3,download,puff,run,xz,zucc",
+            "apps": [],
             "arch": arch || "x86",
             "dedup": "cr",
             "domainjoined": false,
@@ -105,7 +106,8 @@ function defaultBody(arch) {
                 platform: "win",
                 version: "10.0.19045.6456", // Windows 10 22H2 (Build 19045.6456) KB5066791
             },
-            "protocol": "3.1"
+            "protocol": "4.0",
+            // "updaterversion": "143.0.7482.0", // https://chromium.googlesource.com/chromium/src/+/c8865ae02cc63468f70a42d7eb17fb10e7a0bda0/DEPS#:~:text=chromium/third_party/updater/chrome_win_x86_64
         }
     };
 }
@@ -144,7 +146,7 @@ async function fetchAllUpdates() {
             app.flavors.forEach((flavor, flavorIdx) => {
                 if (flavor.arch === arch) {
                     archFlavors.push({ appIdx, flavorIdx, app, flavor });
-                    body.request.app.push({
+                    body.request.apps.push({
                         appid: app.guid,
                         updatecheck: {},
                         version: "0.0.0.0",
@@ -161,7 +163,7 @@ async function fetchAllUpdates() {
 
         for (let j = 0; j < archFlavors.length; j++) {
             const { appIdx, flavorIdx, flavor } = archFlavors[j];
-            const appResponse = response.response.app[j];
+            const appResponse = response.response.apps[j];
 
             if (appResponse.updatecheck.status !== "ok") {
                 console.log(`No update for "${flavor.name}"`);
@@ -169,15 +171,15 @@ async function fetchAllUpdates() {
             }
 
             const updatecheck = appResponse.updatecheck;
-            const version = updatecheck.manifest.version;
+            const version = updatecheck.nextversion;
+            const opr = updatecheck.pipelines[0].operations;
             // Find URL from dl.google.com with exact match to avoid URL injection
-            const url = updatecheck.urls.url.find(s => {
-                const codebase = s.codebase;
-                return codebase === "https://dl.google.com/" ||
-                    (codebase.startsWith("https://dl.google.com/") &&
-                        new URL(codebase).hostname === "dl.google.com");
-            }) || updatecheck.urls.url[updatecheck.urls.url.length - 1];
-            const pkg = updatecheck.manifest.packages.package[updatecheck.manifest.packages.package.length - 1];
+            const url = opr[0].urls.find(s => {
+                const url4 = s.url;
+                return url4 === "https://dl.google.com/" ||
+                       (url4.startsWith("https://dl.google.com/") &&
+                        new URL(url4).hostname === "dl.google.com");
+            }) || updatecheck.urls[updatecheck.urls.length - 1];
 
             // Store result for ordering
             const key = `${appIdx}-${flavorIdx}`;
@@ -185,9 +187,10 @@ async function fetchAllUpdates() {
                 name: flavor.name + ` (${flavor.arch})`,
                 version: version,
                 channel: appResponse.cohortname || "N/A",
-                downloadUrl: url.codebase + pkg.name,
-                size: pkg.size,
-                sha256: pkg.hash_sha256,
+                downloadUrl: url.url,
+                path: opr[1].path,
+                size: opr[0].size,
+                sha256: opr[0].out.sha256,
             });
         }
     }

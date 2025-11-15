@@ -48,6 +48,10 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
+a {
+    color: var(--link-color);
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -132,12 +136,16 @@ button:disabled {
     color: var(--info-text);
 }
 
+.table-container {
+    margin: 40px 0;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
     background-color: var(--card-bg);
     box-shadow: 0 2px 4px var(--shadow);
-    margin: 40px 0;
+    margin-bottom: 20px;
     overflow-x: auto;
     display: block;
 }
@@ -220,7 +228,6 @@ tbody tr:hover {
 }
 
 .download-link {
-    color: var(--link-color);
     text-decoration: none;
 }
 
