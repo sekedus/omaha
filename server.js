@@ -103,11 +103,11 @@ function getMockResponse(requestBody) {
 
 function proxyRequest(req, res) {
     let body = '';
-    
+
     req.on('data', chunk => {
         body += chunk.toString();
     });
-    
+
     req.on('end', () => {
         if (MOCK_MODE) {
             // Return mock data for testing
@@ -120,7 +120,7 @@ function proxyRequest(req, res) {
             res.end(getMockResponse(body));
             return;
         }
-        
+
         const options = {
             hostname: 'update.googleapis.com',
             path: '/service/update2/json',
@@ -130,14 +130,14 @@ function proxyRequest(req, res) {
                 'Content-Length': Buffer.byteLength(body)
             }
         };
-        
+
         const proxyReq = https.request(options, (proxyRes) => {
             let data = '';
-            
+
             proxyRes.on('data', chunk => {
                 data += chunk;
             });
-            
+
             proxyRes.on('end', () => {
                 res.writeHead(proxyRes.statusCode, {
                     'Content-Type': 'application/json',
@@ -148,15 +148,15 @@ function proxyRequest(req, res) {
                 res.end(data);
             });
         });
-        
+
         proxyReq.on('error', (error) => {
-            res.writeHead(500, { 
+            res.writeHead(500, {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'
             });
             res.end(JSON.stringify({ error: error.message }));
         });
-        
+
         proxyReq.write(body);
         proxyReq.end();
     });
@@ -173,19 +173,19 @@ const server = http.createServer((req, res) => {
         res.end();
         return;
     }
-    
+
     // Handle proxy endpoint
     if (req.url === '/api/update' && req.method === 'POST') {
         proxyRequest(req, res);
         return;
     }
-    
+
     // Serve static files
     let filePath = '.' + req.url;
     if (filePath === './') {
         filePath = './index.html';
     }
-    
+
     // Prevent path traversal attacks
     const resolvedPath = path.resolve(filePath);
     const baseDir = path.resolve('.');
@@ -194,7 +194,7 @@ const server = http.createServer((req, res) => {
         res.end('<h1>403 Forbidden</h1>', 'utf-8');
         return;
     }
-    
+
     // Only serve specific file types
     const allowedExtensions = ['.html', '.js', '.css', '.json'];
     const extname = String(path.extname(filePath)).toLowerCase();
@@ -203,7 +203,7 @@ const server = http.createServer((req, res) => {
         res.end('<h1>403 Forbidden</h1>', 'utf-8');
         return;
     }
-    
+
     const contentType = mimeTypes[extname] || 'application/octet-stream';
 
     fs.readFile(filePath, (error, content) => {
