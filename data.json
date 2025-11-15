@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Google Chrome",
+    "tag": "Google_Chrome",
+    "appid": "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
+    "versions": {
+      "142.0.7444.163": {
+        "download": "https://dl.google.com/release2/chrome/ac4a7eovqzrlhvzvyz3jmxlutima_142.0.7444.163/142.0.7444.163_chrome_installer_uncompressed.exe",
+        "size": 365129640,
+        "sha256": "3d8467b5002debab1c511adcd18f2e9e2e572aad1da303bbb9550aeca2ac51f3"
+      }
+    }
+  },
+  {
+    "name": "Google Chrome x64",
+    "tag": "Google_Chrome_64",
+    "appid": "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
+    "versions": {
+      "142.0.7444.163": {
+        "download": "https://dl.google.com/release2/chrome/afnv7ciko6xz6qfe4xmdhvnz34_142.0.7444.163/142.0.7444.163_chrome_installer_uncompressed.exe",
+        "size": 441233320,
+        "sha256": "492169239ebb3d991ee1a2df24660607bcdef0f89e01f579730d39769490b5a6"
+      }
+    }
+  },
+  {
+    "name": "Google Play Games Beta",
+    "tag": "Google_Play_Games_Beta",
+    "appid": "{47B07D71-505D-4665-AFD4-4972A30C6530}",
+    "versions": {
+      "25.11.113.6": {
+        "download": "https://dl.google.com/release2/Play/ad7tiras6o24ztw6qwk7azkamroq_25.11.113.6/HPE-25.11.113.6-CIP.exe",
+        "size": 882828800,
+        "sha256": "75b51368add2a3ae876b73148f7567a5839d2ad5e00045063ee5a8deee393491"
+      }
+    }
+  },
+  {
+    "name": "Google Play Games Developer Emulator",
+    "tag": "GPG_Developer_Emulator_Stable",
+    "appid": "{C601E9A4-03B0-4188-843E-80058BF16EF9}",
+    "versions": {
+      "25.11.113.4": {
+        "download": "https://dl.google.com/release2/Play/c73njk62cwje4xn3fbbksiinyq_25.11.113.4/HPE-25.11.113.4-CIP_3pdev_prod.exe",
+        "size": 802290936,
+        "sha256": "a0d481597ad8d61a5b2b6c2b369a03607a4538fbdda93071fea822b5986c2fea"
+      }
+    }
+  },
+  {
+    "name": "Quick Share",
+    "tag": "Nearby_Better_Together",
+    "appid": "{232066FE-FF4D-4C25-83B4-3F8747CF7E3A}",
+    "versions": {
+      "1.0.2399.1": {
+        "download": "https://dl.google.com/release2/Nearby/acxp4o2gkafyjglomcjnbw3hnfxq_1.0.2399.1/better_together.msi",
+        "size": 97030144,
+        "sha256": "f1db6539b9f213d193602b9387dbe394fd7247c7e1acae30ba208c5f84f453f2"
+      }
+    }
+  },
+  {
+    "name": "Google Earth Pro",
+    "tag": "Google_Earth_Pro",
+    "appid": "{65E60E95-0DE9-43FF-9F3F-4F7D2DFF04B5}",
+    "versions": {
+      "7.3.6.10441": {
+        "download": "https://dl.google.com/release2/Earth/g6s6n6z7ltn2tqto53taohklt4_7.3.6.10441/googleearth-win-pro-7.3.6.10441-x86.exe",
+        "size": 61836440,
+        "sha256": "50be0c04b12a577bb449d44388ed98310a47e5be852a9e7a43219dab32d220f7"
+      }
+    }
+  },
+  {
+    "name": "Google Earth Pro x64",
+    "tag": "Google_Earth_Pro_64",
+    "appid": "{65E60E95-0DE9-43FF-9F3F-4F7D2DFF04B5}",
+    "versions": {
+      "7.3.6.10441": {
+        "download": "https://dl.google.com/release2/Earth/adym7ssbzqvv5qny2wfe56h6ib6a_7.3.6.10441/googleearth-win-pro-7.3.6.10441-x64.exe",
+        "size": 70344344,
+        "sha256": "d8aa6d38d95d92d18601f94b1da092b34f9d275ade630fb972baff8bf1e4ebd8"
+      }
+    }
+  }
+]
