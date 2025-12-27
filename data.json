@@ -83,6 +83,11 @@
         "size": 884797952,
         "sha256": "c6e8e047b34b8d1274721d0ac0e0ec533c3bad65a55148eb631c31f9cad5ea41"
       },
+      "25.12.11.2": {
+        "download": "https://dl.google.com/release2/Play/fw72raq4q3riadqy3oc53vrpsy_25.12.11.2/HPE-25.12.11.2-CIP.exe",
+        "size": 887277152,
+        "sha256": "f8a8fd36f5fc5e998a23ab4aacfcc85603d56c2bd9934b6a2bf7657eb3dd70ff"
+      },
       "25.12.11.0": {
         "download": "https://dl.google.com/release2/Play/jnbbqelktabfte2jwwwurtaclq_25.12.11.0/HPE-25.12.11.0-CIP.exe",
         "size": 887281152,
