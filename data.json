@@ -178,6 +178,11 @@
     "tag": "Google_Play_Games_Beta",
     "appid": "{47B07D71-505D-4665-AFD4-4972A30C6530}",
     "versions": {
+      "26.1.1059.10": {
+        "download": "https://dl.google.com/release2/Play/dd7g2l377tkfwzt3x2gq6xvjhy_26.1.1059.10/HPE-26.1.1059.10-CIP.exe",
+        "size": 888080256,
+        "sha256": "80c061265f785ab262cbcc22cd39cb958bc541e633fee2d8c32da34d9ad7a019"
+      },
       "26.1.1059.8": {
         "download": "https://dl.google.com/release2/Play/aczl6myrepvb4ap6ehvutzv5uveq_26.1.1059.8/HPE-26.1.1059.8-CIP.exe",
         "size": 888082664,
