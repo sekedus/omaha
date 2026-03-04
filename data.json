@@ -4,6 +4,11 @@
     "tag": "Google_Chrome",
     "appid": "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
     "versions": {
+      "145.0.7632.160": {
+        "download": "https://dl.google.com/release2/chrome/ad4munnxzifdyrychahurtkhfesq_145.0.7632.160/145.0.7632.160_chrome_installer_uncompressed.exe",
+        "size": 373082536,
+        "sha256": "a53308ddc9cc66d28c3b1b969f366708bb22c00016fdc0a45676c366bc74fdbf"
+      },
       "145.0.7632.117": {
         "download": "https://dl.google.com/release2/chrome/o3gbc3jeiufgwilu2eiwvev4wm_145.0.7632.117/145.0.7632.117_chrome_installer_uncompressed.exe",
         "size": 372223400,
@@ -91,6 +96,11 @@
     "tag": "Google_Chrome_64",
     "appid": "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
     "versions": {
+      "145.0.7632.160": {
+        "download": "https://dl.google.com/release2/chrome/nuloamky47wcog6772kpqu2zyu_145.0.7632.160/145.0.7632.160_chrome_installer_uncompressed.exe",
+        "size": 451998632,
+        "sha256": "99508495d81d8b221e9cc0ba65121af390efeec937c18717cc9fb53bd575f747"
+      },
       "145.0.7632.117": {
         "download": "https://dl.google.com/release2/chrome/ad2aelqdniafxtduvuzzfr7gl7ja_145.0.7632.117/145.0.7632.117_chrome_installer_uncompressed.exe",
         "size": 451708328,
@@ -260,6 +270,11 @@
     "tag": "GPG_Developer_Emulator_Stable",
     "appid": "{C601E9A4-03B0-4188-843E-80058BF16EF9}",
     "versions": {
+      "26.2.697.0": {
+        "download": "https://dl.google.com/release2/Play/f2kst5y2lbd4sumriosne5jz5y_26.2.697.0/HPE-26.2.697.0-CIP_3pdev_prod.exe",
+        "size": 806169152,
+        "sha256": "58e8f2c198a03b2a86096e3b10b81ab295ff11abd004719157775a0bf8f394eb"
+      },
       "26.1.305.1": {
         "download": "https://dl.google.com/release2/Play/adjsk2ubzpw6vnlycv65ssfh5jza_26.1.305.1/HPE-26.1.305.1-CIP_3pdev_prod.exe",
         "size": 806022160,
