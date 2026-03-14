@@ -342,6 +342,11 @@
     "tag": "Nearby_Better_Together",
     "appid": "{232066FE-FF4D-4C25-83B4-3F8747CF7E3A}",
     "versions": {
+      "1.0.2527.0": {
+        "download": "https://dl.google.com/release2/Nearby/o2jg3mmmruq4r5vmifvettngce_1.0.2527.0/better_together.msi",
+        "size": 147976192,
+        "sha256": "615c5760ce1c556f19ba40ac0a2ccc706a8639f30ea42f66478608cd0d68581a"
+      },
       "1.0.2472.1": {
         "download": "https://dl.google.com/release2/Nearby/gxspypwifhwblultytho5huyiu_1.0.2472.1/better_together.msi",
         "size": 147046400,
