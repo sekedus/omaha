@@ -4,6 +4,11 @@
     "tag": "Google_Chrome",
     "appid": "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
     "versions": {
+      "147.0.7727.56": {
+        "download": "https://dl.google.com/release2/chrome/acwd2bqdzveu4vea7u6gnulbwbaq_147.0.7727.56/147.0.7727.56_chrome_installer_uncompressed.exe",
+        "size": 382885800,
+        "sha256": "a1f5d900194c27f5a9d288bbdd27e014d8d5de86a6a82827bc67d6eabdb4307e"
+      },
       "146.0.7680.178": {
         "download": "https://dl.google.com/release2/chrome/ad235sf2fsej7q5ozyw3smwb4saa_146.0.7680.178/146.0.7680.178_chrome_installer_uncompressed.exe",
         "size": 385822120,
@@ -126,6 +131,11 @@
     "tag": "Google_Chrome_64",
     "appid": "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
     "versions": {
+      "147.0.7727.56": {
+        "download": "https://dl.google.com/release2/chrome/akwief3fngjd4kdk3okju73thm_147.0.7727.56/147.0.7727.56_chrome_installer_uncompressed.exe",
+        "size": 469456296,
+        "sha256": "9eeb0e7b72a61a42140ca7d56a14f2fcfc42e99f38c420d8ab6c59737a27635a"
+      },
       "146.0.7680.178": {
         "download": "https://dl.google.com/release2/chrome/a2pp4ayheqcbjmdfbsltknxihe_146.0.7680.178/146.0.7680.178_chrome_installer_uncompressed.exe",
         "size": 468360104,
@@ -429,6 +439,11 @@
     "tag": "Google_Earth_Pro",
     "appid": "{65E60E95-0DE9-43FF-9F3F-4F7D2DFF04B5}",
     "versions": {
+      "7.3.7.1155": {
+        "download": "https://dl.google.com/release2/Earth/k3qzudikpdogt3wvshgfnc2lfe_7.3.7.1155/googleearth-win-pro-7.3.7.1155-x86.exe",
+        "size": 82978456,
+        "sha256": "80116b7dec305a9b0a62b49b3865c597485213fb3c3391c6dcefb6b5cbf5c8c8"
+      },
       "7.3.7.1094": {
         "download": "https://dl.google.com/release2/Earth/lytpp5fdtdpxu2vtt45g43o7fy_7.3.7.1094/googleearth-win-pro-7.3.7.1094-x86.exe",
         "size": 82974360,
@@ -446,6 +461,11 @@
     "tag": "Google_Earth_Pro_64",
     "appid": "{65E60E95-0DE9-43FF-9F3F-4F7D2DFF04B5}",
     "versions": {
+      "7.3.7.1155": {
+        "download": "https://dl.google.com/release2/Earth/duhweelqjwtdslrbgzm7ehfkc4_7.3.7.1155/googleearth-win-pro-7.3.7.1155-x64.exe",
+        "size": 103980696,
+        "sha256": "d58f4db230805387ecad5bedff5e373a803b410ef1f995a6660e92ef9d7f429e"
+      },
       "7.3.7.1094": {
         "download": "https://dl.google.com/release2/Earth/ad6aui5nqd7sui6zppavnbchlj4a_7.3.7.1094/googleearth-win-pro-7.3.7.1094-x64.exe",
         "size": 104005272,
