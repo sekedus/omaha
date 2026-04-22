@@ -395,6 +395,11 @@
     "tag": "GPG_Developer_Emulator_Stable",
     "appid": "{C601E9A4-03B0-4188-843E-80058BF16EF9}",
     "versions": {
+      "26.4.112.1": {
+        "download": "https://dl.google.com/release2/Play/acq7rxi6pg25i6dyfm37jfvbmoda_26.4.112.1/HPE-26.4.112.1-CIP_3pdev_prod.exe",
+        "size": 805828728,
+        "sha256": "8fdfebca1d45fa9047d3240e68f4e5c0fb1c749c08e8430d3f5caf5d6b9194ab"
+      },
       "26.3.725.2": {
         "download": "https://dl.google.com/release2/Play/ac65gscvleieg766s6davbvs34ha_26.3.725.2/HPE-26.3.725.2-CIP_3pdev_prod.exe",
         "size": 804911392,
