@@ -4,6 +4,11 @@
     "tag": "Google_Chrome",
     "appid": "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
     "versions": {
+      "148.0.7778.168": {
+        "download": "https://dl.google.com/release2/chrome/acsk4ta2nsju5laxlba67yjzikaq_148.0.7778.168/148.0.7778.168_chrome_installer_uncompressed.exe",
+        "size": 389541288,
+        "sha256": "58a3325d9ecc763448263e4e1953612006ceb1a386e00fa421230c0853cd4681"
+      },
       "148.0.7778.97": {
         "download": "https://dl.google.com/release2/chrome/ad4fbq6a27ud5kpnludndpgaopoq_148.0.7778.97/148.0.7778.97_chrome_installer_uncompressed.exe",
         "size": 389941160,
@@ -151,6 +156,11 @@
     "tag": "Google_Chrome_64",
     "appid": "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
     "versions": {
+      "148.0.7778.168": {
+        "download": "https://dl.google.com/release2/chrome/acvxg5jthswikws47ibg4pqxgu2a_148.0.7778.168/148.0.7778.168_chrome_installer_uncompressed.exe",
+        "size": 479358376,
+        "sha256": "786335f414fe8e3f21de178cdf68993bce7eefe5bcc6135aab475bc53c70f828"
+      },
       "148.0.7778.97": {
         "download": "https://dl.google.com/release2/chrome/ad7zgfslmzq6ji2pjtw77iwzqifa_148.0.7778.97/148.0.7778.97_chrome_installer_uncompressed.exe",
         "size": 478368680,
@@ -298,6 +308,11 @@
     "tag": "Google_Play_Games_Beta",
     "appid": "{47B07D71-505D-4665-AFD4-4972A30C6530}",
     "versions": {
+      "26.5.27.1": {
+        "download": "https://dl.google.com/release2/Play/acxcvjazzbj7maw5rodczg76l3oq_26.5.27.1/HPE-26.5.27.1-CIP.exe",
+        "size": 891989992,
+        "sha256": "3e9c2ecf3791638b009421f26771d431ab04c21fe5be2a4f65d5d35343916a44"
+      },
       "26.4.613.2": {
         "download": "https://dl.google.com/release2/Play/kpna7hhkluhf3j5tmm2dqsb4pq_26.4.613.2/HPE-26.4.613.2-CIP.exe",
         "size": 889048400,
