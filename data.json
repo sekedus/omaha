@@ -4,6 +4,11 @@
     "tag": "Google_Chrome",
     "appid": "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
     "versions": {
+      "151.0.7922.174": {
+        "download": "https://dl.google.com/release2/chrome/adb57byhfvb3blp3vkd2pm2veebq_151.0.7922.174/151.0.7922.174_chrome_installer_uncompressed.exe",
+        "size": 420494248,
+        "sha256": "e88e83dd32fdc0ec52efd68d599e66facd26f6d610e3eb1cfa912aa9aee3be21"
+      },
       "151.0.7922.170": {
         "download": "https://dl.google.com/release2/chrome/kpfhf5b43ooxuiqeqizeq6tt5i_151.0.7922.170/151.0.7922.170_chrome_installer_uncompressed.exe",
         "size": 420476328,
@@ -256,6 +261,11 @@
     "tag": "Google_Chrome_64",
     "appid": "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
     "versions": {
+      "151.0.7922.174": {
+        "download": "https://dl.google.com/release2/chrome/act5ayk6gssaaz3pyazvbdtgikbq_151.0.7922.174/151.0.7922.174_chrome_installer_uncompressed.exe",
+        "size": 513135016,
+        "sha256": "f404cef7fa41b510b872b218e011ba5e850ccc078b94fb720632716547201c25"
+      },
       "151.0.7922.170": {
         "download": "https://dl.google.com/release2/chrome/ad2ycppny3ajtdahzfuq7z7t5wsa_151.0.7922.170/151.0.7922.170_chrome_installer_uncompressed.exe",
         "size": 512685480,
@@ -508,6 +518,11 @@
     "tag": "Google_Play_Games_Beta",
     "appid": "{47B07D71-505D-4665-AFD4-4972A30C6530}",
     "versions": {
+      "26.7.1101.2": {
+        "download": "https://dl.google.com/release2/Play/adfgthejuif5wrevvv2x3yww5dga_26.7.1101.2/HPE-26.7.1101.2-CIP.exe",
+        "size": 899615168,
+        "sha256": "3cfa61a5d58f1fed411c6dd4a0f129cef08cb14b932c10915b8843157236535e"
+      },
       "26.7.855.2": {
         "download": "https://dl.google.com/release2/Play/fianzaxl77qppa34j2hhw5voum_26.7.855.2/HPE-26.7.855.2-CIP.exe",
         "size": 898485432,
@@ -715,6 +730,11 @@
     "tag": "GPG_Developer_Emulator_Stable",
     "appid": "{C601E9A4-03B0-4188-843E-80058BF16EF9}",
     "versions": {
+      "26.7.1101.2": {
+        "download": "https://dl.google.com/release2/Play/acrw5wcwpb32hdx6on7khfvyfu6q_26.7.1101.2/HPE-26.7.1101.2-CIP_3pdev_prod.exe",
+        "size": 817010072,
+        "sha256": "902812499295cd012041fdb6f04f292fe53cc09a3630571b3347ee0448abd43e"
+      },
       "26.7.855.1": {
         "download": "https://dl.google.com/release2/Play/ctiazscvvo3gpykyatdgqtbkbu_26.7.855.1/HPE-26.7.855.1-CIP_3pdev_prod.exe",
         "size": 815780024,
@@ -839,6 +859,11 @@
     "tag": "Google_Earth_Pro",
     "appid": "{65E60E95-0DE9-43FF-9F3F-4F7D2DFF04B5}",
     "versions": {
+      "7.3.7.1327": {
+        "download": "https://dl.google.com/release2/Earth/adntfh2xuk7hzghqbu2wlhqheenq_7.3.7.1327/googleearth-win-pro-7.3.7.1327-x86.exe",
+        "size": 79992472,
+        "sha256": "1e3991e9b90b68ffa0a9fe6cb80476933a1a6defa7ae0db19257de3bf4c24db7"
+      },
       "7.3.7.1155": {
         "download": "https://dl.google.com/release2/Earth/k3qzudikpdogt3wvshgfnc2lfe_7.3.7.1155/googleearth-win-pro-7.3.7.1155-x86.exe",
         "size": 82978456,
@@ -861,6 +886,11 @@
     "tag": "Google_Earth_Pro_64",
     "appid": "{65E60E95-0DE9-43FF-9F3F-4F7D2DFF04B5}",
     "versions": {
+      "7.3.7.1327": {
+        "download": "https://dl.google.com/release2/Earth/fnndz6bt2usy3ez2s7f3i6aq6i_7.3.7.1327/googleearth-win-pro-7.3.7.1327-x64.exe",
+        "size": 100802200,
+        "sha256": "12955495fb4357c88d18b2665513a5adadda0724152147529ca853c80354422b"
+      },
       "7.3.7.1155": {
         "download": "https://dl.google.com/release2/Earth/duhweelqjwtdslrbgzm7ehfkc4_7.3.7.1155/googleearth-win-pro-7.3.7.1155-x64.exe",
         "size": 103980696,
