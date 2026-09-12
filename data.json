@@ -558,6 +558,11 @@
     "tag": "Google_Play_Games_Beta",
     "appid": "{47B07D71-505D-4665-AFD4-4972A30C6530}",
     "versions": {
+      "26.8.705.2": {
+        "download": "https://dl.google.com/release2/Play/dat3l2q7vnrgk7dlneakutjj5a_26.8.705.2/HPE-26.8.705.2-CIP.exe",
+        "size": 898096768,
+        "sha256": "9b6efb1632e8bb38aeb1233cfd1fb5d5f1dacd0ed5f6b8cf4fddc9a64405e5a4"
+      },
       "26.8.705.0": {
         "download": "https://dl.google.com/release2/Play/adfdo5jf2rm3hmmavxazjttdltwa_26.8.705.0/HPE-26.8.705.0-CIP.exe",
         "size": 897888088,
@@ -785,6 +790,11 @@
     "tag": "GPG_Developer_Emulator_Stable",
     "appid": "{C601E9A4-03B0-4188-843E-80058BF16EF9}",
     "versions": {
+      "26.8.705.2": {
+        "download": "https://dl.google.com/release2/Play/ad6jyt253g5ltdufomrod2z5zbfa_26.8.705.2/HPE-26.8.705.2-CIP_3pdev_prod.exe",
+        "size": 814934744,
+        "sha256": "e8b83d9a01f4f9081b1f61330e2408be7193ac9e5defb392d108644a7a6eafba"
+      },
       "26.8.237.1": {
         "download": "https://dl.google.com/release2/Play/acdjoqyf6umdunpdnzfzjoqrqsma_26.8.237.1/HPE-26.8.237.1-CIP_3pdev_prod.exe",
         "size": 817532200,
