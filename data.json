@@ -4,6 +4,11 @@
     "tag": "Google_Chrome",
     "appid": "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
     "versions": {
+      "154.0.8037.98": {
+        "download": "https://dl.google.com/release2/chrome/adlncrhrlmip6efjsmh5j3rnq6vq_154.0.8037.98/154.0.8037.98_chrome_installer_uncompressed.exe",
+        "size": 438329256,
+        "sha256": "dd9945e3271a08f6cef1b67169fcf906ac3dee37ee027f669d177e8b508a5781"
+      },
       "154.0.8037.93": {
         "download": "https://dl.google.com/release2/chrome/ad2o76wk76c3nmahm2zvf5u3nzya_154.0.8037.93/154.0.8037.93_chrome_installer_uncompressed.exe",
         "size": 438324136,
@@ -301,6 +306,11 @@
     "tag": "Google_Chrome_64",
     "appid": "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
     "versions": {
+      "154.0.8037.98": {
+        "download": "https://dl.google.com/release2/chrome/ac3stf7x6z62hvwmphhro6dpbhpq_154.0.8037.98/154.0.8037.98_chrome_installer_uncompressed.exe",
+        "size": 519395752,
+        "sha256": "2d5f2073185cdf8e72bd70b19970bcb2e1ade19a85d68b6be2a3fe672816941d"
+      },
       "154.0.8037.93": {
         "download": "https://dl.google.com/release2/chrome/jn2gux5cxlyyg3xmconseuamzu_154.0.8037.93/154.0.8037.93_chrome_installer_uncompressed.exe",
         "size": 519908264,
@@ -845,6 +855,11 @@
     "tag": "GPG_Developer_Emulator_Stable",
     "appid": "{C601E9A4-03B0-4188-843E-80058BF16EF9}",
     "versions": {
+      "26.9.555.0": {
+        "download": "https://dl.google.com/release2/Play/l5ujtd6bzrcl5bmou3ypr37dte_26.9.555.0/HPE-26.9.555.0-CIP_3pdev_prod.exe",
+        "size": 812223624,
+        "sha256": "b2ff7f32c5eaf618aacfc579dca05e5e4eb5009f9399560719a4ab54415bc362"
+      },
       "26.8.974.1": {
         "download": "https://dl.google.com/release2/Play/jyehxtveai2z62mxm5raei22he_26.8.974.1/HPE-26.8.974.1-CIP_3pdev_prod.exe",
         "size": 813693120,
