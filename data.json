@@ -4,6 +4,11 @@
     "tag": "Google_Chrome",
     "appid": "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
     "versions": {
+      "157.0.8103.79": {
+        "download": "https://dl.google.com/release2/chrome/acq6idvhxkcwr5otpuozd2yp6bia_157.0.8103.79/157.0.8103.79_chrome_installer_uncompressed.exe",
+        "size": 454269352,
+        "sha256": "b9342a5e718678ee56ac876900672a54f7eff205c9178072b8a833d2bd09c910"
+      },
       "157.0.8103.51": {
         "download": "https://dl.google.com/release2/chrome/joakxwrgjhhcrkplqg7sgj2g2u_157.0.8103.51/157.0.8103.51_chrome_installer_uncompressed.exe",
         "size": 454243240,
@@ -346,6 +351,11 @@
     "tag": "Google_Chrome_64",
     "appid": "{8A69D345-D564-463C-AFF1-A69D9E530F96}",
     "versions": {
+      "157.0.8103.79": {
+        "download": "https://dl.google.com/release2/chrome/acab3swyzqgszbsf6npoanqbvgvq_157.0.8103.79/157.0.8103.79_chrome_installer_uncompressed.exe",
+        "size": 528945064,
+        "sha256": "acb77d39d1759408ad6f9874081c25e68cd042f1de6145064bbc9c2be4ad733e"
+      },
       "157.0.8103.51": {
         "download": "https://dl.google.com/release2/chrome/hhb3n3my4axozv7qmzlcqqaspi_157.0.8103.51/157.0.8103.51_chrome_installer_uncompressed.exe",
         "size": 530228648,
